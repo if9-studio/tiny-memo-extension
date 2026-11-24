@@ -1,0 +1,107 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "Recopila fragmentos de texto seleccionados en una lista Markdown limpia, con TTS local opcional.",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "Añadir selección a Tiny Memo"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "Idioma",
+    "languageAria": "Idioma de la interfaz",
+    "languageSystem": "Sistema",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "madeByIf9": "Hecho por if9"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "Notas recopiladas",
+    "notesCount": "{count} notas",
+    "notesCountOne": "{count} nota",
+    "notesPlaceholder": "Selecciona texto en cualquier página y añádelo mediante menú contextual, atajo o botón flotante.",
+    "mergeMultiline": "Combinar selecciones multilínea en una sola línea",
+    "settingsHeading": "Ajustes",
+    "ttsVoiceLabel": "Voz TTS",
+    "ttsLoading": "Cargando voces…",
+    "ttsUnavailable": "Servicio TTS local no disponible",
+    "autoTtsLabel": "Leer automáticamente el texto seleccionado",
+    "hoverButtonsLabel": "Mostrar iconos al pasar el cursor (experimental)",
+    "siteConfigHeading": "Reglas de selector por sitio",
+    "addSiteConfig": "Añadir regla",
+    "getCurrentSite": "Usar sitio actual",
+    "siteConfigEmpty": "Sin reglas. Haz clic en «Añadir regla» para definir elementos.",
+    "deleteSiteConfigTitle": "Eliminar regla",
+    "copyMarkdown": "Copiar como Markdown",
+    "copiedMarkdown": "¡Copiado!",
+    "copyAndClear": "Copiar y vaciar",
+    "noNotesToCopy": "No hay notas para copiar.",
+    "noNotesToOperate": "No hay notas para procesar.",
+    "copyFailed": "Error al copiar las notas.",
+    "copyClipboardError": "Error al escribir en el portapapeles. Revisa los permisos.",
+    "clearSuccess": "Notas copiadas y vaciadas.",
+    "clearError": "No se pudieron vaciar las notas.",
+    "actionError": "La operación falló. Inténtalo de nuevo.",
+    "loadNotesError": "Error al cargar las notas.",
+    "websiteLink": "Sitio web",
+    "openWebsiteTitle": "Visitar el sitio web de Tiny Memo"
+  },
+  "siteConfigModal": {
+    "title": "Añadir regla de selector por sitio",
+    "domainLabel": "Dominio",
+    "domainPlaceholder": "p. ej. example.com",
+    "selectorLabel": "Selector CSS",
+    "selectorPlaceholder": "p. ej. .article-content p",
+    "domainRequired": "Introduce un dominio.",
+    "selectorRequired": "Introduce un selector CSS.",
+    "alreadyExists": "Esta regla ya existe.",
+    "currentSiteError": "No se pudo leer el dominio de la pestaña actual."
+  },
+  "ttsLang": {
+    "zh": "Chino",
+    "en": "Inglés",
+    "ja": "Japonés",
+    "ko": "Coreano",
+    "fr": "Francés",
+    "de": "Alemán",
+    "es": "Español"
+  },
+  "contextMenu": {
+    "addSelection": "Añadir a Tiny Memo"
+  },
+  "background": {
+    "notesCleared": "Notas vaciadas.",
+    "noNotesToClear": "No hay notas para vaciar.",
+    "clearNotesError": "Error al vaciar las notas.",
+    "ttsRequestFailed": "Error en la solicitud TTS ({status})",
+    "ttsServiceError": "El servicio TTS devolvió un error",
+    "fetchVoicesFailed": "No se pudieron obtener las voces TTS ({status})"
+  },
+  "notification": {
+    "noteAdded": "+1 guardada · {count} notas en total",
+    "noteAddedOne": "+1 guardada · {count} nota en total",
+    "copyAndClear": "Copiar y vaciar",
+    "fetchNotesError": "Error al cargar notas para copiar.",
+    "copyFailed": "Error al copiar al portapapeles.",
+    "noNotesToCopy": "No hay notas para copiar.",
+    "clearSuccess": "Notas copiadas y vaciadas.",
+    "clearFailedComm": "Error al vaciar las notas (error de conexión).",
+    "clearFailed": "Error al vaciar las notas.",
+    "buttonActionError": "No se pudo completar la acción.",
+    "ttsPlayFailed": "No se pudo reproducir el audio TTS."
+  },
+  "inline": {
+    "addToMemo": "Añadir a notas",
+    "playVoice": "Reproducir voz",
+    "runtimeUnavailable": "Contexto de extensión no válido. Recarga la página.",
+    "addNoteFailed": "Error al añadir nota: {error}",
+    "addNoteError": "Error al añadir nota: {error}",
+    "ttsRequestFailed": "Error en solicitud TTS: {error}",
+    "ttsGenerateFailed": "Error al generar TTS: {error}",
+    "ttsUnknownError": "Error desconocido",
+    "ttsRequestError": "Error TTS: {error}",
+    "audioPlayFailed": "No se pudo reproducir el audio."
+  }
+}

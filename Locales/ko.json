@@ -1,0 +1,105 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "웹페이지에서 선택한 텍스트 조각을 깔끔한 Markdown 목록으로 수집하고 선택적 로컬 TTS 읽기를 지원합니다.",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "선택한 텍스트를 Tiny Memo에 추가"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "언어",
+    "languageAria": "인터페이스 언어",
+    "languageSystem": "시스템 설정 따르기",
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "close": "닫기",
+    "madeByIf9": "Made by if9"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "수집된 메모",
+    "notesCount": "{count}개",
+    "notesPlaceholder": "웹페이지에서 텍스트를 선택한 뒤 우클릭 메뉴, 단축키 또는 인라인 버튼으로 추가하세요.",
+    "mergeMultiline": "여러 줄 선택을 한 줄로 합치기",
+    "settingsHeading": "설정",
+    "ttsVoiceLabel": "TTS 음성",
+    "ttsLoading": "음성 목록 불러오는 중…",
+    "ttsUnavailable": "로컬 TTS 서비스에 연결할 수 없습니다",
+    "autoTtsLabel": "선택한 텍스트 자동 읽기",
+    "hoverButtonsLabel": "마우스 호버 시 인라인 아이콘 표시(실험적)",
+    "siteConfigHeading": "사이트 선택자 규칙",
+    "addSiteConfig": "규칙 추가",
+    "getCurrentSite": "현재 사이트 가져오기",
+    "siteConfigEmpty": "규칙이 없습니다. \"규칙 추가\"를 눌러 대상 요소를 지정하세요.",
+    "deleteSiteConfigTitle": "규칙 삭제",
+    "copyMarkdown": "Markdown으로 복사",
+    "copiedMarkdown": "복사됨",
+    "copyAndClear": "복사 후 비우기",
+    "noNotesToCopy": "복사할 메모가 없습니다.",
+    "noNotesToOperate": "작업할 메모가 없습니다.",
+    "copyFailed": "메모 복사에 실패했습니다.",
+    "copyClipboardError": "클립보드 쓰기에 실패했습니다. 브라우저 권한을 확인하세요.",
+    "clearSuccess": "메모를 복사하고 비웠습니다.",
+    "clearError": "메모를 비우는 중 오류가 발생했습니다.",
+    "actionError": "작업에 실패했습니다. 다시 시도해 주세요.",
+    "loadNotesError": "메모를 불러오지 못했습니다.",
+    "websiteLink": "웹사이트",
+    "openWebsiteTitle": "Tiny Memo 웹사이트 열기"
+  },
+  "siteConfigModal": {
+    "title": "사이트 선택자 규칙 추가",
+    "domainLabel": "도메인",
+    "domainPlaceholder": "예: example.com",
+    "selectorLabel": "CSS 선택자",
+    "selectorPlaceholder": "예: .article-content p",
+    "domainRequired": "도메인을 입력해 주세요.",
+    "selectorRequired": "CSS 선택자를 입력해 주세요.",
+    "alreadyExists": "이미 존재하는 규칙입니다.",
+    "currentSiteError": "현재 탭의 도메인을 읽을 수 없습니다."
+  },
+  "ttsLang": {
+    "zh": "중국어",
+    "en": "영어",
+    "ja": "일본어",
+    "ko": "한국어",
+    "fr": "프랑스어",
+    "de": "독일어",
+    "es": "스페인어"
+  },
+  "contextMenu": {
+    "addSelection": "Tiny Memo에 추가"
+  },
+  "background": {
+    "notesCleared": "메모를 비웠습니다.",
+    "noNotesToClear": "비울 메모가 없습니다.",
+    "clearNotesError": "메모를 비우는 중 오류가 발생했습니다.",
+    "ttsRequestFailed": "TTS 요청 실패 ({status})",
+    "ttsServiceError": "TTS 서비스에서 오류를 반환했습니다",
+    "fetchVoicesFailed": "TTS 음성 목록을 가져오지 못했습니다 ({status})"
+  },
+  "notification": {
+    "noteAdded": "+1 저장 · 총 {count}개",
+    "copyAndClear": "복사 후 비우기",
+    "fetchNotesError": "복사할 메모를 불러오지 못했습니다.",
+    "copyFailed": "클립보드에 메모를 복사하지 못했습니다.",
+    "noNotesToCopy": "복사할 메모가 없습니다.",
+    "clearSuccess": "메모를 복사하고 비웠습니다.",
+    "clearFailedComm": "메모 비우기 실패 (통신 오류).",
+    "clearFailed": "메모를 비우는 중 오류가 발생했습니다.",
+    "buttonActionError": "작업을 완료하지 못했습니다.",
+    "ttsPlayFailed": "TTS 오디오 재생에 실패했습니다."
+  },
+  "inline": {
+    "addToMemo": "메모에 추가",
+    "playVoice": "음성 재생",
+    "runtimeUnavailable": "확장 프로그램 컨텍스트가 만료되었습니다. 페이지를 새로고침하세요.",
+    "addNoteFailed": "메모 추가 실패: {error}",
+    "addNoteError": "메모 추가 오류: {error}",
+    "ttsRequestFailed": "TTS 요청 실패: {error}",
+    "ttsGenerateFailed": "TTS 생성 실패: {error}",
+    "ttsUnknownError": "알 수 없는 오류",
+    "ttsRequestError": "TTS 오류: {error}",
+    "audioPlayFailed": "오디오 재생에 실패했습니다."
+  }
+}

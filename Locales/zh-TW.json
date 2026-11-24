@@ -1,0 +1,105 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "快速收集網頁選取的文字片段到整潔的 Markdown 清單，支援可選本機 TTS 朗讀。",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "將選取內容新增至 Tiny Memo"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "語言",
+    "languageAria": "介面語言",
+    "languageSystem": "跟隨系統",
+    "save": "儲存",
+    "cancel": "取消",
+    "delete": "刪除",
+    "close": "關閉",
+    "madeByIf9": "由 if9 出品"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "已收集的筆記",
+    "notesCount": "{count} 筆",
+    "notesPlaceholder": "在任意網頁選取文字後，可透過右鍵選單、快捷鍵或浮動按鈕快速收錄。",
+    "mergeMultiline": "將多行選取文字合併為單行",
+    "settingsHeading": "設定",
+    "ttsVoiceLabel": "TTS 語音",
+    "ttsLoading": "正在載入語音清單…",
+    "ttsUnavailable": "本機 TTS 服務未連線",
+    "autoTtsLabel": "自動朗讀選取的文字",
+    "hoverButtonsLabel": "滑鼠懸停時顯示行內按鈕（實驗性）",
+    "siteConfigHeading": "網站元素選擇器規則",
+    "addSiteConfig": "新增規則",
+    "getCurrentSite": "取得目前網站",
+    "siteConfigEmpty": "尚無規則，點擊「新增規則」即可指定目標元素。",
+    "deleteSiteConfigTitle": "刪除規則",
+    "copyMarkdown": "複製為 Markdown",
+    "copiedMarkdown": "已複製",
+    "copyAndClear": "複製並清空",
+    "noNotesToCopy": "沒有筆記可以複製。",
+    "noNotesToOperate": "沒有筆記可以操作。",
+    "copyFailed": "複製筆記失敗。",
+    "copyClipboardError": "寫入剪貼簿失敗，請檢查瀏覽器權限。",
+    "clearSuccess": "筆記已複製並清空。",
+    "clearError": "清空筆記時發生錯誤。",
+    "actionError": "操作失敗，請重試。",
+    "loadNotesError": "載入筆記出錯。",
+    "websiteLink": "官網",
+    "openWebsiteTitle": "造訪 Tiny Memo 官網"
+  },
+  "siteConfigModal": {
+    "title": "新增網站元素規則",
+    "domainLabel": "網站網域",
+    "domainPlaceholder": "例如：example.com",
+    "selectorLabel": "CSS 選擇器",
+    "selectorPlaceholder": "例如：.article-content p",
+    "domainRequired": "請輸入網站網域。",
+    "selectorRequired": "請輸入 CSS 選擇器。",
+    "alreadyExists": "此規則已存在。",
+    "currentSiteError": "無法取得目前分頁的網域。"
+  },
+  "ttsLang": {
+    "zh": "中文",
+    "en": "英語",
+    "ja": "日語",
+    "ko": "韓語",
+    "fr": "法語",
+    "de": "德語",
+    "es": "西班牙語"
+  },
+  "contextMenu": {
+    "addSelection": "新增至 Tiny Memo"
+  },
+  "background": {
+    "notesCleared": "筆記已清空。",
+    "noNotesToClear": "沒有筆記可以清空。",
+    "clearNotesError": "清空筆記時發生錯誤。",
+    "ttsRequestFailed": "TTS 請求失敗（{status}）",
+    "ttsServiceError": "TTS 服務傳回錯誤",
+    "fetchVoicesFailed": "取得語音清單失敗（{status}）"
+  },
+  "notification": {
+    "noteAdded": "記錄 +1 · 目前共 {count} 筆",
+    "copyAndClear": "複製並清空",
+    "fetchNotesError": "取得筆記以複製時發生錯誤。",
+    "copyFailed": "複製筆記到剪貼簿失敗。",
+    "noNotesToCopy": "沒有筆記可以複製。",
+    "clearSuccess": "筆記已複製並清空。",
+    "clearFailedComm": "清空筆記失敗（通訊錯誤）。",
+    "clearFailed": "清空筆記時發生錯誤。",
+    "buttonActionError": "處理操作時發生錯誤。",
+    "ttsPlayFailed": "播放 TTS 語音失敗。"
+  },
+  "inline": {
+    "addToMemo": "新增至筆記",
+    "playVoice": "播放語音",
+    "runtimeUnavailable": "擴充功能環境已失效，請重新整理頁面後再試。",
+    "addNoteFailed": "新增筆記失敗：{error}",
+    "addNoteError": "新增筆記出錯：{error}",
+    "ttsRequestFailed": "TTS 請求失敗：{error}",
+    "ttsGenerateFailed": "TTS 生成失敗：{error}",
+    "ttsUnknownError": "未知錯誤",
+    "ttsRequestError": "TTS 請求出錯：{error}",
+    "audioPlayFailed": "音訊播放失敗。"
+  }
+}

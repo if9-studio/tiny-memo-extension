@@ -1,0 +1,107 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "Ausgewählte Textausschnitte auf Webseiten als saubere Markdown-Liste sammeln, optional mit lokalem TTS.",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "Auswahl zu Tiny Memo hinzufügen"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "Sprache",
+    "languageAria": "Oberflächensprache",
+    "languageSystem": "Systemstandard",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "close": "Schließen",
+    "madeByIf9": "Von if9"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "Gesammelte Notizen",
+    "notesCount": "{count} Notizen",
+    "notesCountOne": "{count} Notiz",
+    "notesPlaceholder": "Text auf einer Webseite markieren und per Kontextmenü, Kürzel oder Inline-Button hinzufügen.",
+    "mergeMultiline": "Mehrzeilige Auswahl zu einer Zeile zusammenführen",
+    "settingsHeading": "Einstellungen",
+    "ttsVoiceLabel": "TTS-Stimme",
+    "ttsLoading": "Stimmen werden geladen…",
+    "ttsUnavailable": "Lokaler TTS-Dienst nicht erreichbar",
+    "autoTtsLabel": "Markierten Text automatisch vorlesen",
+    "hoverButtonsLabel": "Inline-Symbole beim Überfahren anzeigen (experimentell)",
+    "siteConfigHeading": "Website-Selektorregeln",
+    "addSiteConfig": "Regel hinzufügen",
+    "getCurrentSite": "Aktuelle Seite übernehmen",
+    "siteConfigEmpty": "Noch keine Regeln. Klicke auf \"Regel hinzufügen\", um Elemente festzulegen.",
+    "deleteSiteConfigTitle": "Regel löschen",
+    "copyMarkdown": "Als Markdown kopieren",
+    "copiedMarkdown": "Kopiert!",
+    "copyAndClear": "Kopieren & leeren",
+    "noNotesToCopy": "Keine Notizen zum Kopieren.",
+    "noNotesToOperate": "Keine Notizen vorhanden.",
+    "copyFailed": "Notizen konnten nicht kopiert werden.",
+    "copyClipboardError": "Zwischenablage fehlgeschlagen. Browser-Berechtigung prüfen.",
+    "clearSuccess": "Notizen kopiert und geleert.",
+    "clearError": "Notizen konnten nicht geleert werden.",
+    "actionError": "Aktion fehlgeschlagen. Bitte erneut versuchen.",
+    "loadNotesError": "Notizen konnten nicht geladen werden.",
+    "websiteLink": "Website",
+    "openWebsiteTitle": "Tiny Memo Website öffnen"
+  },
+  "siteConfigModal": {
+    "title": "Website-Selektorregel hinzufügen",
+    "domainLabel": "Domain",
+    "domainPlaceholder": "z. B. example.com",
+    "selectorLabel": "CSS-Selektor",
+    "selectorPlaceholder": "z. B. .article-content p",
+    "domainRequired": "Bitte eine Domain eingeben.",
+    "selectorRequired": "Bitte einen CSS-Selektor eingeben.",
+    "alreadyExists": "Diese Regel existiert bereits.",
+    "currentSiteError": "Domain des aktuellen Tabs konnte nicht gelesen werden."
+  },
+  "ttsLang": {
+    "zh": "Chinesisch",
+    "en": "Englisch",
+    "ja": "Japanisch",
+    "ko": "Koreanisch",
+    "fr": "Französisch",
+    "de": "Deutsch",
+    "es": "Spanisch"
+  },
+  "contextMenu": {
+    "addSelection": "Zu Tiny Memo hinzufügen"
+  },
+  "background": {
+    "notesCleared": "Notizen geleert.",
+    "noNotesToClear": "Keine Notizen zum Leeren.",
+    "clearNotesError": "Fehler beim Leeren der Notizen.",
+    "ttsRequestFailed": "TTS-Anfrage fehlgeschlagen ({status})",
+    "ttsServiceError": "TTS-Dienst meldete einen Fehler",
+    "fetchVoicesFailed": "TTS-Stimmen konnten nicht geladen werden ({status})"
+  },
+  "notification": {
+    "noteAdded": "+1 gespeichert · {count} Notizen gesamt",
+    "noteAddedOne": "+1 gespeichert · {count} Notiz gesamt",
+    "copyAndClear": "Kopieren & leeren",
+    "fetchNotesError": "Notizen zum Kopieren konnten nicht geladen werden.",
+    "copyFailed": "Kopieren in die Zwischenablage fehlgeschlagen.",
+    "noNotesToCopy": "Keine Notizen zum Kopieren.",
+    "clearSuccess": "Notizen kopiert und geleert.",
+    "clearFailedComm": "Leeren fehlgeschlagen (Verbindungsfehler).",
+    "clearFailed": "Fehler beim Leeren der Notizen.",
+    "buttonActionError": "Aktion konnte nicht ausgeführt werden.",
+    "ttsPlayFailed": "TTS-Audio konnte nicht abgespielt werden."
+  },
+  "inline": {
+    "addToMemo": "Zur Notiz hinzufügen",
+    "playVoice": "Vorlesen",
+    "runtimeUnavailable": "Erweiterungskontext ungültig. Bitte Seite neu laden.",
+    "addNoteFailed": "Notiz hinzufügen fehlgeschlagen: {error}",
+    "addNoteError": "Fehler beim Hinzufügen: {error}",
+    "ttsRequestFailed": "TTS-Anfrage fehlgeschlagen: {error}",
+    "ttsGenerateFailed": "TTS-Erzeugung fehlgeschlagen: {error}",
+    "ttsUnknownError": "Unbekannter Fehler",
+    "ttsRequestError": "TTS-Fehler: {error}",
+    "audioPlayFailed": "Audio konnte nicht abgespielt werden."
+  }
+}

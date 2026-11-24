@@ -1,0 +1,18 @@
+{
+  "extName": {
+    "message": "Tiny Memo",
+    "description": "Extension name shown in Chrome Web Store and extensions page."
+  },
+  "extDescription": {
+    "message": "快速收集網頁選取的文字片段到整潔的 Markdown 清單，支援可選本機 TTS 朗讀。",
+    "description": "Extension description shown in Chrome Web Store and extensions page."
+  },
+  "actionDefaultTitle": {
+    "message": "Tiny Memo",
+    "description": "Tooltip title for the browser action button."
+  },
+  "commandAddSelection": {
+    "message": "將選取內容新增至 Tiny Memo",
+    "description": "Keyboard shortcut command description for adding selected text."
+  }
+}

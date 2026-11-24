@@ -1,0 +1,13 @@
+{
+  "name": "tiny-memo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:locales": "node scripts/sync-locales.mjs",
+    "build:site": "npm --prefix site run build",
+    "test:ext": "node --test tests/i18n-seo.test.mjs",
+    "test:site": "npm --prefix site test",
+    "check": "node scripts/check.mjs"
+  }
+}

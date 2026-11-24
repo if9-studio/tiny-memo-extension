@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0d0f13"/>
+  <rect x="36" y="36" width="1128" height="558" rx="24" fill="#15181f" stroke="#2a303c" stroke-width="1.5"/>
+  <rect x="740" y="135" width="350" height="360" rx="18" fill="#1d222c" stroke="#363e4f" stroke-width="2"/>
+  <rect x="772" y="172" width="286" height="44" rx="8" fill="#252b37" stroke="#3b4456" stroke-width="1.2"/>
+  <circle cx="798" cy="194" r="7" fill="#4CAF50"/>
+  <rect x="818" y="188" width="170" height="12" rx="6" fill="#e6e9ef"/>
+  <rect x="772" y="236" width="286" height="44" rx="8" fill="#252b37" stroke="#3b4456" stroke-width="1.2"/>
+  <circle cx="798" cy="258" r="7" fill="#4CAF50"/>
+  <rect x="818" y="252" width="198" height="12" rx="6" fill="#b7beca"/>
+  <rect x="772" y="300" width="286" height="44" rx="8" fill="#252b37" stroke="#3b4456" stroke-width="1.2"/>
+  <circle cx="798" cy="322" r="7" fill="#6ca4ff"/>
+  <rect x="818" y="316" width="142" height="12" rx="6" fill="#b7beca"/>
+  <rect x="772" y="388" width="136" height="44" rx="22" fill="#3a404d"/>
+  <rect x="922" y="388" width="136" height="44" rx="22" fill="#4CAF50"/>
+  <text x="96" y="206" fill="#66d178" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="500">if9.cool / tiny-memo</text>
+  <text x="96" y="314" fill="#f3f5f8" font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif" font-size="88" font-weight="600" letter-spacing="-2">Tiny Memo</text>
+  <text x="96" y="382" fill="#b0b7c3" font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif" font-size="30" font-weight="400">Collect web text snippets into Markdown lists.</text>
+  <text x="96" y="434" fill="#7c8493" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">Chrome MV3 · Zero cloud accounts · 8 languages</text>
+</svg>

@@ -1,0 +1,18 @@
+{
+  "extName": {
+    "message": "Tiny Memo",
+    "description": "Extension name shown in Chrome Web Store and extensions page."
+  },
+  "extDescription": {
+    "message": "Recopila fragmentos de texto seleccionados en una lista Markdown limpia, con TTS local opcional.",
+    "description": "Extension description shown in Chrome Web Store and extensions page."
+  },
+  "actionDefaultTitle": {
+    "message": "Tiny Memo",
+    "description": "Tooltip title for the browser action button."
+  },
+  "commandAddSelection": {
+    "message": "Añadir selección a Tiny Memo",
+    "description": "Keyboard shortcut command description for adding selected text."
+  }
+}

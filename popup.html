@@ -1,66 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>我的简易笔记</title>
+    <title>Tiny Memo</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h4>收集的笔记：</h4>
-    <textarea id="notesDisplay" readonly></textarea>
+    <header class="popup-header">
+      <div class="brand-title">
+        <img src="icons/icon16.png" alt="" width="16" height="16" />
+        <span id="appBrandName">Tiny Memo</span>
+      </div>
+      <div class="lang-select-wrap">
+        <span class="lang-icon" id="langGlobeIcon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+        </span>
+        <select id="languageSelect" aria-label="Interface language">
+          <option value="system" id="optLangSystem">System</option>
+          <option value="en" lang="en">English</option>
+          <option value="ja" lang="ja">日本語</option>
+          <option value="zh-CN" lang="zh-CN">简体中文</option>
+          <option value="zh-TW" lang="zh-TW">繁體中文</option>
+          <option value="ko" lang="ko">한국어</option>
+          <option value="de" lang="de">Deutsch</option>
+          <option value="fr" lang="fr">Français</option>
+          <option value="es" lang="es">Español</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="notes-header">
+      <h4 id="notesHeading">Collected notes</h4>
+      <span id="notesCountBadge" class="note-count">0 notes</span>
+    </div>
+    <textarea id="notesDisplay" readonly placeholder=""></textarea>
+
     <div class="settings">
-      <label for="mergeMultilineCheckbox">
+      <div class="settings-section-title">
+        <span class="inline-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </span>
+        <span id="settingsHeading">Settings</span>
+      </div>
+
+      <label for="mergeMultilineCheckbox" class="checkbox-label">
         <input type="checkbox" id="mergeMultilineCheckbox" />
-        将多行选中文本合并为单行 (默认开启)
+        <span id="mergeMultilineLabel">Merge multi-line selection into a single line</span>
       </label>
+
       <div class="settings-group">
-        <label for="ttsVoiceSelect">TTS语音选项：</label>
+        <label for="ttsVoiceSelect" id="ttsVoiceLabel">TTS voice</label>
         <select id="ttsVoiceSelect"></select>
         <label for="autoTtsCheckbox" class="checkbox-label">
           <input type="checkbox" id="autoTtsCheckbox" />
-          自动朗读选中的文本
+          <span id="autoTtsLabel">Auto-read selected text</span>
         </label>
         <label for="hoverButtonsCheckbox" class="checkbox-label">
           <input type="checkbox" id="hoverButtonsCheckbox" />
-          鼠标悬停时显示按钮 (实验性)
+          <span id="hoverButtonsLabel">Show inline icons on hover (experimental)</span>
         </label>
 
-        <div id="siteConfigSection" style="margin-top: 10px; border-top: 1px solid #ccc; padding-top: 10px">
+        <div id="siteConfigSection" class="site-config-section">
           <details>
-            <summary style="cursor: pointer; margin-bottom: 5px">网站元素配置</summary>
-            <div style="margin: 5px 0">
-              <button id="addSiteConfigBtn" style="font-size: 12px; padding: 2px 5px">添加配置</button>
-              <button id="getCurrentSiteBtn" style="font-size: 12px; padding: 2px 5px; margin-left: 5px">获取当前网站</button>
+            <summary class="site-config-summary">
+              <span class="inline-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="4" x2="20" y1="9" y2="9" />
+                  <line x1="4" x2="20" y1="15" y2="15" />
+                  <line x1="10" x2="8" y1="3" y2="21" />
+                  <line x1="16" x2="14" y1="3" y2="21" />
+                </svg>
+              </span>
+              <span id="siteConfigHeading">Site selector rules</span>
+            </summary>
+            <div class="site-config-actions">
+              <button type="button" id="addSiteConfigBtn" class="btn-secondary btn-compact">Add rule</button>
+              <button type="button" id="getCurrentSiteBtn" class="btn-secondary btn-compact">Use current site</button>
             </div>
-            <div id="siteConfigList" style="max-height: 100px; overflow-y: auto; margin-top: 5px"></div>
+            <div id="siteConfigList" class="site-config-list"></div>
           </details>
         </div>
       </div>
     </div>
+
+    <div id="statusBanner" class="status-banner" role="status" aria-live="polite" hidden></div>
+
     <div class="buttons">
-      <button id="copyMarkdownBtn">复制为 Markdown</button>
-      <button id="clearNotesBtn">复制并清空</button>
+      <button type="button" id="copyMarkdownBtn">Copy as Markdown</button>
+      <button type="button" id="clearNotesBtn">Copy &amp; Clear</button>
     </div>
 
-    <!-- 添加配置的模态框 -->
-    <div id="configModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000">
-      <div style="background-color: white; margin: 20% auto; padding: 20px; width: 80%; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)">
-        <h4 style="margin-top: 0">添加网站元素配置</h4>
-        <div style="margin-bottom: 10px">
-          <label for="domainInput">网站域名:</label>
-          <input type="text" id="domainInput" style="width: 100%; margin-top: 5px" placeholder="例如: yuanbao.tencent.com" />
+    <footer class="popup-footer">
+      <span id="madeByIf9" class="made-by">Made by if9</span>
+      <a id="websiteLink" class="website-link" href="https://tiny-memo.if9.cool/" target="_blank" rel="noopener noreferrer">
+        <span id="websiteLinkLabel">Website</span>
+        <span class="inline-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 7h10v10" />
+            <path d="M7 17 17 7" />
+          </svg>
+        </span>
+      </a>
+    </footer>
+
+    <div id="configModal" class="modal-backdrop" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h4 id="modalTitle" class="modal-title">Add site selector rule</h4>
+        <div class="modal-field">
+          <label for="domainInput" id="domainInputLabel">Domain</label>
+          <input type="text" id="domainInput" placeholder="e.g. example.com" />
         </div>
-        <div style="margin-bottom: 10px">
-          <label for="selectorInput">CSS选择器:</label>
-          <input type="text" id="selectorInput" style="width: 100%; margin-top: 5px" placeholder="例如: .agent-chat__list__item__content p" />
+        <div class="modal-field">
+          <label for="selectorInput" id="selectorInputLabel">CSS selector</label>
+          <input type="text" id="selectorInput" placeholder="e.g. .article-content p" />
         </div>
-        <div style="display: flex; justify-content: flex-end; margin-top: 10px">
-          <button id="cancelConfigBtn" style="margin-right: 10px">取消</button>
-          <button id="saveConfigBtn">保存</button>
+        <div id="modalStatus" class="modal-status" role="alert" hidden></div>
+        <div class="modal-actions">
+          <button type="button" id="cancelConfigBtn" class="btn-secondary">Cancel</button>
+          <button type="button" id="saveConfigBtn" class="btn-primary">Save</button>
         </div>
       </div>
     </div>
 
+    <script src="i18n-catalog.js"></script>
+    <script src="i18n.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

@@ -1,198 +1,282 @@
-// popup.js
-document.addEventListener("DOMContentLoaded", () => {
+// popup.js - Tiny Memo extension popup UI controller with 8-language runtime i18n
+document.addEventListener("DOMContentLoaded", async () => {
+  const i18n = globalThis.TinyMemoI18n;
+  const catalog = globalThis.__TINY_MEMO_CATALOG__ || {};
+
+  const languageSelect = document.getElementById("languageSelect");
+  const optLangSystem = document.getElementById("optLangSystem");
+  const appBrandName = document.getElementById("appBrandName");
+  const notesHeading = document.getElementById("notesHeading");
+  const notesCountBadge = document.getElementById("notesCountBadge");
   const notesDisplay = document.getElementById("notesDisplay");
   const copyMarkdownBtn = document.getElementById("copyMarkdownBtn");
   const clearNotesBtn = document.getElementById("clearNotesBtn");
   const mergeMultilineCheckbox = document.getElementById("mergeMultilineCheckbox");
+  const mergeMultilineLabel = document.getElementById("mergeMultilineLabel");
+  const settingsHeading = document.getElementById("settingsHeading");
+  const ttsVoiceLabel = document.getElementById("ttsVoiceLabel");
   const ttsVoiceSelect = document.getElementById("ttsVoiceSelect");
   const autoTtsCheckbox = document.getElementById("autoTtsCheckbox");
+  const autoTtsLabel = document.getElementById("autoTtsLabel");
   const hoverButtonsCheckbox = document.getElementById("hoverButtonsCheckbox");
-
-  // 网站配置相关元素
+  const hoverButtonsLabel = document.getElementById("hoverButtonsLabel");
+  const siteConfigHeading = document.getElementById("siteConfigHeading");
   const siteConfigList = document.getElementById("siteConfigList");
   const addSiteConfigBtn = document.getElementById("addSiteConfigBtn");
   const getCurrentSiteBtn = document.getElementById("getCurrentSiteBtn");
+  const statusBanner = document.getElementById("statusBanner");
+  const madeByIf9 = document.getElementById("madeByIf9");
+  const websiteLink = document.getElementById("websiteLink");
+  const websiteLinkLabel = document.getElementById("websiteLinkLabel");
+
   const configModal = document.getElementById("configModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const domainInputLabel = document.getElementById("domainInputLabel");
   const domainInput = document.getElementById("domainInput");
+  const selectorInputLabel = document.getElementById("selectorInputLabel");
   const selectorInput = document.getElementById("selectorInput");
+  const modalStatus = document.getElementById("modalStatus");
   const saveConfigBtn = document.getElementById("saveConfigBtn");
   const cancelConfigBtn = document.getElementById("cancelConfigBtn");
 
-  // 加载"合并多行"设置
+  let activeLanguage = "en";
+  let t = i18n.createTranslator(activeLanguage, catalog);
+  let cachedNotesCount = 0;
+  let cachedVoices = null;
+  let cachedSelectedVoice = "zh-CN-XiaoxiaoNeural";
+  let cachedSiteConfigs = [];
+  let copyFeedbackTimeout = null;
+  let statusBannerTimeout = null;
+
+  function showStatus(message, kind = "info") {
+    clearTimeout(statusBannerTimeout);
+    statusBanner.textContent = message;
+    statusBanner.dataset.kind = kind;
+    statusBanner.hidden = false;
+    statusBannerTimeout = setTimeout(() => {
+      statusBanner.hidden = true;
+    }, 3000);
+  }
+
+  function showModalError(message) {
+    modalStatus.textContent = message;
+    modalStatus.hidden = false;
+  }
+
+  function clearModalError() {
+    modalStatus.textContent = "";
+    modalStatus.hidden = true;
+  }
+
+  function updateNotesCountBadge() {
+    notesCountBadge.textContent = t("popup.notesCount", { count: cachedNotesCount });
+  }
+
+  function applyTranslations() {
+    t = i18n.createTranslator(activeLanguage, catalog);
+    document.documentElement.lang = activeLanguage;
+    document.title = t("popup.title");
+
+    appBrandName.textContent = t("common.appName");
+    languageSelect.setAttribute("aria-label", t("common.languageAria"));
+    optLangSystem.textContent = t("common.languageSystem");
+
+    notesHeading.textContent = t("popup.notesHeading");
+    notesDisplay.placeholder = t("popup.notesPlaceholder");
+    updateNotesCountBadge();
+
+    settingsHeading.textContent = t("popup.settingsHeading");
+    mergeMultilineLabel.textContent = t("popup.mergeMultiline");
+    ttsVoiceLabel.textContent = t("popup.ttsVoiceLabel");
+    autoTtsLabel.textContent = t("popup.autoTtsLabel");
+    hoverButtonsLabel.textContent = t("popup.hoverButtonsLabel");
+
+    siteConfigHeading.textContent = t("popup.siteConfigHeading");
+    addSiteConfigBtn.textContent = t("popup.addSiteConfig");
+    getCurrentSiteBtn.textContent = t("popup.getCurrentSite");
+
+    copyMarkdownBtn.textContent = t("popup.copyMarkdown");
+    clearNotesBtn.textContent = t("popup.copyAndClear");
+
+    madeByIf9.innerHTML = i18n.renderBrandTextHtml(t("common.madeByIf9"));
+    websiteLinkLabel.textContent = t("popup.websiteLink");
+    websiteLink.title = t("popup.openWebsiteTitle");
+    websiteLink.href = i18n.getWebsiteUrl(activeLanguage);
+
+    modalTitle.textContent = t("siteConfigModal.title");
+    domainInputLabel.textContent = t("siteConfigModal.domainLabel");
+    domainInput.placeholder = t("siteConfigModal.domainPlaceholder");
+    selectorInputLabel.textContent = t("siteConfigModal.selectorLabel");
+    selectorInput.placeholder = t("siteConfigModal.selectorPlaceholder");
+    cancelConfigBtn.textContent = t("common.cancel");
+    saveConfigBtn.textContent = t("common.save");
+
+    if (cachedVoices) {
+      populateVoiceSelect(cachedVoices, cachedSelectedVoice);
+    }
+    renderSiteConfigs(cachedSiteConfigs);
+  }
+
+  async function initLanguage() {
+    try {
+      const stored = await chrome.storage.local.get(["appLanguage"]);
+      const pref = i18n.normalizeLanguagePreference(stored?.appLanguage) || "system";
+      languageSelect.value = pref;
+      activeLanguage = await i18n.getActiveLanguage();
+    } catch (error) {
+      console.error("[Tiny Memo] Failed to load language preference:", error);
+      languageSelect.value = "system";
+      activeLanguage = i18n.resolveBrowserLanguage();
+    }
+    applyTranslations();
+  }
+
+  languageSelect.addEventListener("change", async () => {
+    const selected = i18n.normalizeLanguagePreference(languageSelect.value) || "system";
+    try {
+      await chrome.storage.local.set({ appLanguage: selected });
+      activeLanguage = await i18n.getActiveLanguage();
+      applyTranslations();
+    } catch (error) {
+      console.error("[Tiny Memo] Failed to save language preference:", error);
+    }
+  });
+
   async function loadMergeSetting() {
     try {
       const data = await chrome.storage.local.get(["mergeMultilineSetting"]);
-      // 默认开启，所以如果未定义，则设为 true
       mergeMultilineCheckbox.checked = data.mergeMultilineSetting === undefined ? true : data.mergeMultilineSetting;
     } catch (error) {
-      console.error("[Tiny Memo] 加载合并设置失败:", error);
-      mergeMultilineCheckbox.checked = true; // 出错时也默认开启
+      console.error("[Tiny Memo] Failed to load merge setting:", error);
+      mergeMultilineCheckbox.checked = true;
     }
   }
 
-  // 保存"合并多行"设置
   mergeMultilineCheckbox.addEventListener("change", async () => {
     try {
       await chrome.storage.local.set({ mergeMultilineSetting: mergeMultilineCheckbox.checked });
-      console.log("[Tiny Memo] 合并设置已保存:", mergeMultilineCheckbox.checked);
     } catch (error) {
-      console.error("[Tiny Memo] 保存合并设置失败:", error);
+      console.error("[Tiny Memo] Failed to save merge setting:", error);
     }
   });
 
-  // 加载"自动TTS"设置
   async function loadAutoTtsSetting() {
     try {
       const data = await chrome.storage.local.get(["autoTtsSetting"]);
-      // 默认关闭，所以如果未定义，则设为 false
       autoTtsCheckbox.checked = data.autoTtsSetting === true;
-      console.log("[Tiny Memo] 自动TTS设置已加载:", autoTtsCheckbox.checked);
     } catch (error) {
-      console.error("[Tiny Memo] 加载自动TTS设置失败:", error);
-      autoTtsCheckbox.checked = false; // 出错时默认关闭
+      console.error("[Tiny Memo] Failed to load auto-TTS setting:", error);
+      autoTtsCheckbox.checked = false;
     }
   }
 
-  // 保存"自动TTS"设置
   autoTtsCheckbox.addEventListener("change", async () => {
     try {
       await chrome.storage.local.set({ autoTtsSetting: autoTtsCheckbox.checked });
-      console.log("[Tiny Memo] 自动TTS设置已保存:", autoTtsCheckbox.checked);
     } catch (error) {
-      console.error("[Tiny Memo] 保存自动TTS设置失败:", error);
+      console.error("[Tiny Memo] Failed to save auto-TTS setting:", error);
     }
   });
 
-  // 加载"鼠标悬停按钮"设置
   async function loadHoverButtonsSetting() {
     try {
       const data = await chrome.storage.local.get(["hoverButtonsSetting"]);
-      // 默认关闭
       hoverButtonsCheckbox.checked = data.hoverButtonsSetting === true;
-      console.log("[Tiny Memo] 悬停按钮设置已加载:", hoverButtonsCheckbox.checked);
     } catch (error) {
-      console.error("[Tiny Memo] 加载悬停按钮设置失败:", error);
-      hoverButtonsCheckbox.checked = false; // 出错时默认关闭
+      console.error("[Tiny Memo] Failed to load hover buttons setting:", error);
+      hoverButtonsCheckbox.checked = false;
     }
   }
 
-  // 保存"鼠标悬停按钮"设置
   hoverButtonsCheckbox.addEventListener("change", async () => {
     try {
       await chrome.storage.local.set({ hoverButtonsSetting: hoverButtonsCheckbox.checked });
-      console.log("[Tiny Memo] 悬停按钮设置已保存:", hoverButtonsCheckbox.checked);
     } catch (error) {
-      console.error("[Tiny Memo] 保存悬停按钮设置失败:", error);
+      console.error("[Tiny Memo] Failed to save hover buttons setting:", error);
     }
   });
 
-  // 加载TTS语音选项
-  async function loadTtsVoices() {
-    try {
-      // 先加载当前选择的语音
-      const settings = await chrome.storage.local.get(["ttsVoice"]);
-      const currentVoice = settings.ttsVoice || "zh-CN-XiaoxiaoNeural"; // 默认中文语音
-
-      // 从背景脚本获取语音列表
-      chrome.runtime.sendMessage({ type: "GET_TTS_VOICES" }, (response) => {
-        if (chrome.runtime.lastError) {
-          console.error("[Tiny Memo] 获取TTS语音列表失败:", chrome.runtime.lastError);
-          return;
-        }
-
-        if (response && response.success && response.voices) {
-          populateVoiceSelect(response.voices, currentVoice);
-        } else {
-          console.error("[Tiny Memo] 获取TTS语音列表响应错误:", response?.error);
-        }
-      });
-    } catch (error) {
-      console.error("[Tiny Memo] 加载TTS语音设置失败:", error);
-    }
+  function getTtsLangDisplayName(langCode) {
+    const key = `ttsLang.${langCode}`;
+    const label = t(key);
+    return label === key ? langCode : label;
   }
 
-  // 填充语音选择下拉菜单
   function populateVoiceSelect(voices, currentVoice) {
-    // 清空现有选项
+    cachedVoices = voices;
     ttsVoiceSelect.innerHTML = "";
 
-    // 常用语言（优先显示）
     const commonLanguages = ["zh", "en", "ja"];
-    const languageNames = {
-      zh: "中文",
-      en: "英语",
-      ja: "日语",
-      ko: "韩语",
-      fr: "法语",
-      de: "德语",
-      es: "西班牙语",
-    };
 
-    // 如果voices不是按语言分组的，则创建一个简单列表
+    if (!voices || (typeof voices === "object" && !Array.isArray(voices) && Object.keys(voices).length === 0)) {
+      const option = document.createElement("option");
+      option.value = currentVoice;
+      option.textContent = t("popup.ttsUnavailable");
+      ttsVoiceSelect.appendChild(option);
+      return;
+    }
+
     if (!voices.zh && Array.isArray(voices)) {
       voices.forEach((voice) => {
         const option = document.createElement("option");
         option.value = voice.name || voice;
-        option.text = voice.displayName || voice.name || voice;
-        if (voice.name === currentVoice || voice === currentVoice) {
-          option.selected = true;
-        }
+        option.textContent = voice.displayName || voice.name || voice;
+        if (option.value === currentVoice) option.selected = true;
         ttsVoiceSelect.appendChild(option);
       });
       return;
     }
 
-    // 按语言分组添加语音选项
-    // 先添加常用语言
-    commonLanguages.forEach((lang) => {
-      if (voices[lang] && voices[lang].length > 0) {
-        const optgroup = document.createElement("optgroup");
-        optgroup.label = languageNames[lang] || lang;
+    const appendGroup = (lang) => {
+      if (!voices[lang] || voices[lang].length === 0) return;
+      const optgroup = document.createElement("optgroup");
+      optgroup.label = getTtsLangDisplayName(lang);
+      voices[lang].forEach((voice) => {
+        const option = document.createElement("option");
+        option.value = voice.name;
+        option.textContent = voice.displayName || voice.name;
+        if (voice.name === currentVoice) option.selected = true;
+        optgroup.appendChild(option);
+      });
+      ttsVoiceSelect.appendChild(optgroup);
+    };
 
-        voices[lang].forEach((voice) => {
-          const option = document.createElement("option");
-          option.value = voice.name;
-          option.text = voice.displayName || `${voice.name}`;
-          if (voice.name === currentVoice) {
-            option.selected = true;
-          }
-          optgroup.appendChild(option);
-        });
-
-        ttsVoiceSelect.appendChild(optgroup);
-      }
-    });
-
-    // 添加其他语言
+    commonLanguages.forEach(appendGroup);
     Object.keys(voices).forEach((lang) => {
-      if (!commonLanguages.includes(lang) && voices[lang] && voices[lang].length > 0) {
-        const optgroup = document.createElement("optgroup");
-        optgroup.label = languageNames[lang] || lang;
-
-        voices[lang].forEach((voice) => {
-          const option = document.createElement("option");
-          option.value = voice.name;
-          option.text = voice.displayName || `${voice.name}`;
-          if (voice.name === currentVoice) {
-            option.selected = true;
-          }
-          optgroup.appendChild(option);
-        });
-
-        ttsVoiceSelect.appendChild(optgroup);
-      }
+      if (!commonLanguages.includes(lang)) appendGroup(lang);
     });
   }
 
-  // 保存TTS语音设置
+  async function loadTtsVoices() {
+    try {
+      const settings = await chrome.storage.local.get(["ttsVoice"]);
+      cachedSelectedVoice = settings.ttsVoice || "zh-CN-XiaoxiaoNeural";
+
+      chrome.runtime.sendMessage({ type: "GET_TTS_VOICES" }, (response) => {
+        if (chrome.runtime.lastError) {
+          console.error("[Tiny Memo] Failed to fetch TTS voices:", chrome.runtime.lastError);
+          populateVoiceSelect({}, cachedSelectedVoice);
+          return;
+        }
+        if (response && response.success && response.voices) {
+          populateVoiceSelect(response.voices, cachedSelectedVoice);
+        } else {
+          populateVoiceSelect({}, cachedSelectedVoice);
+        }
+      });
+    } catch (error) {
+      console.error("[Tiny Memo] Failed to load TTS voices:", error);
+    }
+  }
+
   ttsVoiceSelect.addEventListener("change", async () => {
     const selectedVoice = ttsVoiceSelect.value;
     if (selectedVoice) {
+      cachedSelectedVoice = selectedVoice;
       try {
         await chrome.storage.local.set({ ttsVoice: selectedVoice });
-        console.log("[Tiny Memo] TTS语音设置已保存:", selectedVoice);
       } catch (error) {
-        console.error("[Tiny Memo] 保存TTS语音设置失败:", error);
+        console.error("[Tiny Memo] Failed to save TTS voice:", error);
       }
     }
   });
@@ -201,11 +285,15 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const data = await chrome.storage.local.get(["memoNotes"]);
       const notes = data.memoNotes || [];
+      cachedNotesCount = notes.length;
       notesDisplay.value = notes.join("\n");
-      console.log("[Tiny Memo] Notes loaded into popup display.");
+      updateNotesCountBadge();
     } catch (error) {
-      console.error("[Tiny Memo] 加载笔记失败:", error);
-      notesDisplay.value = "加载笔记出错。";
+      console.error("[Tiny Memo] Failed to load notes:", error);
+      cachedNotesCount = 0;
+      notesDisplay.value = "";
+      updateNotesCountBadge();
+      showStatus(t("popup.loadNotesError"), "error");
     }
   }
 
@@ -214,113 +302,90 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await chrome.storage.local.get(["memoNotes"]);
       const notes = data.memoNotes || [];
       if (notes.length === 0) {
-        alert("没有笔记可以复制。");
+        showStatus(t("popup.noNotesToCopy"), "error");
         return;
       }
       const markdownNotes = notes.map((note) => `- ${note}`).join("\n");
       await navigator.clipboard.writeText(markdownNotes);
-      copyMarkdownBtn.textContent = "已复制!";
-      setTimeout(() => {
-        copyMarkdownBtn.textContent = "复制为 Markdown";
+      clearTimeout(copyFeedbackTimeout);
+      copyMarkdownBtn.textContent = t("popup.copiedMarkdown");
+      copyFeedbackTimeout = setTimeout(() => {
+        copyMarkdownBtn.textContent = t("popup.copyMarkdown");
       }, 2000);
     } catch (error) {
-      console.error("[Tiny Memo] 复制笔记失败:", error);
-      alert("复制失败！");
+      console.error("[Tiny Memo] Failed to copy notes:", error);
+      showStatus(t("popup.copyFailed"), "error");
     }
   });
 
-  // "复制并清空笔记" 按钮的逻辑
   clearNotesBtn.addEventListener("click", async () => {
     const currentNotesValue = notesDisplay.value;
-
     if (currentNotesValue === "") {
-      console.log("[Tiny Memo] Copy & Clear button clicked, but no notes in display.");
-      alert("没有笔记可以操作。");
+      showStatus(t("popup.noNotesToOperate"), "error");
       return;
     }
 
     try {
-      // 1. 先执行复制操作 (在 popup 中完成)
       const notesToCopy = currentNotesValue
         .split("\n")
         .map((note) => `- ${note}`)
         .join("\n");
       await navigator.clipboard.writeText(notesToCopy);
-      console.log("[Tiny Memo] Notes copied to clipboard from popup.");
 
-      // 2. 发送消息给 background 请求清空
-      console.log("[Tiny Memo] Sending request to background to clear notes.");
       const response = await chrome.runtime.sendMessage({ type: "COPY_AND_CLEAR_REQUEST" });
-
-      // 3. 处理 background 的响应
       if (response && response.success) {
-        notesDisplay.value = ""; // 响应成功后清空显示区域
-        console.log("[Tiny Memo] Background confirmed notes cleared.");
-        alert("笔记已复制并清空。"); // 使用后台返回的消息或固定文本
+        notesDisplay.value = "";
+        cachedNotesCount = 0;
+        updateNotesCountBadge();
+        showStatus(t("popup.clearSuccess"), "success");
       } else {
-        console.error("[Tiny Memo] Background script failed to clear notes:", response?.message);
-        alert(response?.message || "清空笔记时发生错误。");
+        showStatus(response?.message || t("popup.clearError"), "error");
       }
     } catch (error) {
-      console.error("[Tiny Memo] Error during copy & clear in popup:", error);
-      if (error.message.includes("clipboard.writeText")) {
-        alert("复制笔记失败！请检查剪贴板权限。");
+      console.error("[Tiny Memo] Error during copy & clear:", error);
+      if (error?.message?.includes("clipboard.writeText")) {
+        showStatus(t("popup.copyClipboardError"), "error");
       } else {
-        alert("操作失败！请重试。");
+        showStatus(t("popup.actionError"), "error");
       }
     }
   });
 
-  // 加载网站元素配置
   async function loadSiteConfigs() {
     try {
       const data = await chrome.storage.local.get(["siteConfigs"]);
-      const configs = data.siteConfigs || [];
-      renderSiteConfigs(configs);
-      console.log("[Tiny Memo] 网站配置已加载:", configs);
+      cachedSiteConfigs = data.siteConfigs || [];
+      renderSiteConfigs(cachedSiteConfigs);
     } catch (error) {
-      console.error("[Tiny Memo] 加载网站配置失败:", error);
+      console.error("[Tiny Memo] Failed to load site configs:", error);
     }
   }
 
-  // 渲染网站配置列表
   function renderSiteConfigs(configs) {
+    cachedSiteConfigs = configs;
     siteConfigList.innerHTML = "";
-    if (configs.length === 0) {
+    if (!configs || configs.length === 0) {
       const emptyMsg = document.createElement("div");
-      emptyMsg.textContent = '暂无配置，点击"添加配置"按钮开始添加';
-      emptyMsg.style.color = "#666";
-      emptyMsg.style.fontSize = "12px";
-      emptyMsg.style.padding = "5px";
+      emptyMsg.className = "site-config-empty";
+      emptyMsg.textContent = t("popup.siteConfigEmpty");
       siteConfigList.appendChild(emptyMsg);
       return;
     }
 
     configs.forEach((config, index) => {
       const configItem = document.createElement("div");
-      configItem.style.display = "flex";
-      configItem.style.justifyContent = "space-between";
-      configItem.style.alignItems = "center";
-      configItem.style.padding = "3px 0";
-      configItem.style.borderBottom = index < configs.length - 1 ? "1px solid #eee" : "none";
+      configItem.className = "site-config-item";
 
       const configText = document.createElement("div");
+      configText.className = "site-config-text";
       configText.textContent = `${config.domain} → ${config.selector}`;
-      configText.style.fontSize = "12px";
-      configText.style.overflow = "hidden";
-      configText.style.textOverflow = "ellipsis";
-      configText.style.whiteSpace = "nowrap";
-      configText.style.marginRight = "5px";
 
       const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "×";
-      deleteBtn.style.backgroundColor = "transparent";
-      deleteBtn.style.border = "none";
-      deleteBtn.style.color = "#999";
-      deleteBtn.style.cursor = "pointer";
-      deleteBtn.style.fontSize = "14px";
-      deleteBtn.style.padding = "0 5px";
-      deleteBtn.title = "删除配置";
+      deleteBtn.type = "button";
+      deleteBtn.className = "delete-rule-btn";
+      deleteBtn.innerHTML = i18n.trash2Svg(13, 1.75);
+      deleteBtn.title = t("popup.deleteSiteConfigTitle");
+      deleteBtn.setAttribute("aria-label", t("popup.deleteSiteConfigTitle"));
 
       deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -333,7 +398,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 删除网站配置
   async function deleteSiteConfig(index) {
     try {
       const data = await chrome.storage.local.get(["siteConfigs"]);
@@ -342,136 +406,127 @@ document.addEventListener("DOMContentLoaded", () => {
         configs.splice(index, 1);
         await chrome.storage.local.set({ siteConfigs: configs });
         renderSiteConfigs(configs);
-        console.log("[Tiny Memo] 网站配置已删除");
       }
     } catch (error) {
-      console.error("[Tiny Memo] 删除网站配置失败:", error);
+      console.error("[Tiny Memo] Failed to delete site config:", error);
     }
   }
 
-  // 添加网站配置
   async function addSiteConfig(domain, selector) {
     try {
       if (!domain || !selector) return false;
-
       const data = await chrome.storage.local.get(["siteConfigs"]);
       const configs = data.siteConfigs || [];
-
-      // 检查是否已存在相同配置
       const exists = configs.some((config) => config.domain === domain && config.selector === selector);
 
       if (!exists) {
         configs.push({ domain, selector });
         await chrome.storage.local.set({ siteConfigs: configs });
         renderSiteConfigs(configs);
-        console.log("[Tiny Memo] 网站配置已添加:", { domain, selector });
         return true;
-      } else {
-        alert("该配置已存在");
-        return false;
       }
+      showModalError(t("siteConfigModal.alreadyExists"));
+      return false;
     } catch (error) {
-      console.error("[Tiny Memo] 添加网站配置失败:", error);
+      console.error("[Tiny Memo] Failed to add site config:", error);
       return false;
     }
   }
 
-  // 显示配置模态框
   addSiteConfigBtn.addEventListener("click", () => {
     domainInput.value = "";
     selectorInput.value = "";
-    configModal.style.display = "block";
+    clearModalError();
+    configModal.hidden = false;
   });
 
-  // 获取当前网站信息
   getCurrentSiteBtn.addEventListener("click", async () => {
     try {
-      // 获取当前活动标签页
       const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (tabs.length > 0) {
+      if (tabs.length > 0 && tabs[0].url) {
         const url = new URL(tabs[0].url);
         domainInput.value = url.hostname;
-        configModal.style.display = "block";
+        selectorInput.value = "";
+        clearModalError();
+        configModal.hidden = false;
+      } else {
+        showStatus(t("siteConfigModal.currentSiteError"), "error");
       }
     } catch (error) {
-      console.error("[Tiny Memo] 获取当前网站失败:", error);
+      console.error("[Tiny Memo] Failed to read current site:", error);
+      showStatus(t("siteConfigModal.currentSiteError"), "error");
     }
   });
 
-  // 保存配置
   saveConfigBtn.addEventListener("click", async () => {
+    clearModalError();
     const domain = domainInput.value.trim();
     const selector = selectorInput.value.trim();
 
     if (!domain) {
-      alert("请输入网站域名");
+      showModalError(t("siteConfigModal.domainRequired"));
       return;
     }
-
     if (!selector) {
-      alert("请输入CSS选择器");
+      showModalError(t("siteConfigModal.selectorRequired"));
       return;
     }
 
     const success = await addSiteConfig(domain, selector);
     if (success) {
-      configModal.style.display = "none";
+      configModal.hidden = true;
     }
   });
 
-  // 取消配置
   cancelConfigBtn.addEventListener("click", () => {
-    configModal.style.display = "none";
+    configModal.hidden = true;
   });
 
-  // 点击模态框外部关闭
   configModal.addEventListener("click", (e) => {
     if (e.target === configModal) {
-      configModal.style.display = "none";
+      configModal.hidden = true;
     }
   });
 
-  loadNotes(); // 弹窗加载时即显示笔记
-  loadMergeSetting(); // 加载合并设置
-  loadTtsVoices(); // 加载TTS语音选项
-  loadAutoTtsSetting(); // 加载自动TTS设置
-  loadHoverButtonsSetting(); // 加载悬停按钮设置
-  loadSiteConfigs(); // 加载网站配置
+  await initLanguage();
+  await Promise.all([
+    loadNotes(),
+    loadMergeSetting(),
+    loadAutoTtsSetting(),
+    loadHoverButtonsSetting(),
+    loadSiteConfigs(),
+  ]);
+  loadTtsVoices();
 
-  // (可选) 监听存储变化，实时更新弹窗内容
-  chrome.storage.onChanged.addListener((changes, namespace) => {
-    if (namespace === "local") {
-      if (changes.memoNotes) {
-        console.log("[Tiny Memo] memoNotes changed in storage, reloading notes in popup.", changes.memoNotes);
-        loadNotes();
+  chrome.storage.onChanged.addListener(async (changes, namespace) => {
+    if (namespace !== "local") return;
+    if (changes.appLanguage) {
+      const pref = i18n.normalizeLanguagePreference(changes.appLanguage.newValue) || "system";
+      languageSelect.value = pref;
+      activeLanguage = await i18n.getActiveLanguage();
+      applyTranslations();
+    }
+    if (changes.memoNotes) {
+      loadNotes();
+    }
+    if (changes.mergeMultilineSetting) {
+      loadMergeSetting();
+    }
+    if (changes.ttsVoice) {
+      cachedSelectedVoice = changes.ttsVoice.newValue;
+      if (ttsVoiceSelect.value !== cachedSelectedVoice) {
+        const matching = Array.from(ttsVoiceSelect.options).find((opt) => opt.value === cachedSelectedVoice);
+        if (matching) matching.selected = true;
       }
-      if (changes.mergeMultilineSetting) {
-        console.log("[Tiny Memo] mergeMultilineSetting changed in storage, reloading setting in popup.", changes.mergeMultilineSetting);
-        loadMergeSetting();
-      }
-      if (changes.ttsVoice) {
-        console.log("[Tiny Memo] ttsVoice changed in storage, reloading setting in popup.", changes.ttsVoice);
-        // 只需更新下拉框选中值，无需重新加载所有语音
-        if (ttsVoiceSelect.value !== changes.ttsVoice.newValue) {
-          const options = Array.from(ttsVoiceSelect.options);
-          const matching = options.find((opt) => opt.value === changes.ttsVoice.newValue);
-          if (matching) {
-            matching.selected = true;
-          }
-        }
-      }
-      if (changes.autoTtsSetting) {
-        console.log("[Tiny Memo] autoTtsSetting changed in storage, reloading setting in popup.", changes.autoTtsSetting);
-        autoTtsCheckbox.checked = changes.autoTtsSetting.newValue === true;
-      }
-      if (changes.hoverButtonsSetting) {
-        console.log("[Tiny Memo] hoverButtonsSetting changed in storage, reloading setting in popup.", changes.hoverButtonsSetting);
-        hoverButtonsCheckbox.checked = changes.hoverButtonsSetting.newValue === true;
-      }
-      if (changes.siteConfigs) {
-        console.log("[Tiny Memo] siteConfigs changed in storage, reloading configs in popup.", changes.siteConfigs);
-        renderSiteConfigs(changes.siteConfigs.newValue || []);
-      }
+    }
+    if (changes.autoTtsSetting) {
+      autoTtsCheckbox.checked = changes.autoTtsSetting.newValue === true;
+    }
+    if (changes.hoverButtonsSetting) {
+      hoverButtonsCheckbox.checked = changes.hoverButtonsSetting.newValue === true;
+    }
+    if (changes.siteConfigs) {
+      renderSiteConfigs(changes.siteConfigs.newValue || []);
     }
   });
 });
