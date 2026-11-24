@@ -1,0 +1,105 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "Web ページで選択したテキストをすっきりした Markdown リストへ素早く収集。ローカル TTS 読み上げにも対応。",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "選択したテキストを Tiny Memo に追加"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "言語",
+    "languageAria": "表示言語",
+    "languageSystem": "システム設定に従う",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "close": "閉じる",
+    "madeByIf9": "Made by if9"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "収集したメモ",
+    "notesCount": "{count} 件",
+    "notesPlaceholder": "任意のページでテキストを選択し、右クリックメニュー、ショートカット、またはインラインボタンから追加できます。",
+    "mergeMultiline": "複数行の選択テキストを 1 行に結合する",
+    "settingsHeading": "設定",
+    "ttsVoiceLabel": "TTS 音声",
+    "ttsLoading": "音声リストを読み込み中…",
+    "ttsUnavailable": "ローカル TTS サービスに接続できません",
+    "autoTtsLabel": "選択テキストを自動で読み上げる",
+    "hoverButtonsLabel": "ホバー時にインラインアイコンを表示（実験的）",
+    "siteConfigHeading": "サイト別セレクタ設定",
+    "addSiteConfig": "ルールを追加",
+    "getCurrentSite": "現在のサイトを取得",
+    "siteConfigEmpty": "ルールがありません。「ルールを追加」から対象要素を指定できます。",
+    "deleteSiteConfigTitle": "ルールを削除",
+    "copyMarkdown": "Markdown としてコピー",
+    "copiedMarkdown": "コピーしました",
+    "copyAndClear": "コピーして空にする",
+    "noNotesToCopy": "コピーするメモがありません。",
+    "noNotesToOperate": "操作対象のメモがありません。",
+    "copyFailed": "メモのコピーに失敗しました。",
+    "copyClipboardError": "クリップボードへのコピーに失敗しました。ブラウザの権限をご確認ください。",
+    "clearSuccess": "メモをコピーして空にしました。",
+    "clearError": "メモの消去中にエラーが発生しました。",
+    "actionError": "操作に失敗しました。もう一度お試しください。",
+    "loadNotesError": "メモの読み込みに失敗しました。",
+    "websiteLink": "公式サイト",
+    "openWebsiteTitle": "Tiny Memo 公式サイトを開く"
+  },
+  "siteConfigModal": {
+    "title": "サイト別セレクタ設定を追加",
+    "domainLabel": "ドメイン",
+    "domainPlaceholder": "例: example.com",
+    "selectorLabel": "CSS セレクタ",
+    "selectorPlaceholder": "例: .article-content p",
+    "domainRequired": "ドメインを入力してください。",
+    "selectorRequired": "CSS セレクタを入力してください。",
+    "alreadyExists": "このルールはすでに登録されています。",
+    "currentSiteError": "現在のタブのドメインを取得できませんでした。"
+  },
+  "ttsLang": {
+    "zh": "中国語",
+    "en": "英語",
+    "ja": "日本語",
+    "ko": "韓国語",
+    "fr": "フランス語",
+    "de": "ドイツ語",
+    "es": "スペイン語"
+  },
+  "contextMenu": {
+    "addSelection": "Tiny Memo に追加"
+  },
+  "background": {
+    "notesCleared": "メモを空にしました。",
+    "noNotesToClear": "消去するメモがありません。",
+    "clearNotesError": "メモの消去中にエラーが発生しました。",
+    "ttsRequestFailed": "TTS リクエストに失敗しました（{status}）",
+    "ttsServiceError": "TTS サービスがエラーを返しました",
+    "fetchVoicesFailed": "TTS 音声リストの取得に失敗しました（{status}）"
+  },
+  "notification": {
+    "noteAdded": "+1 保存 · 合計 {count} 件",
+    "copyAndClear": "コピーして空にする",
+    "fetchNotesError": "コピー用のメモ取得に失敗しました。",
+    "copyFailed": "クリップボードへのコピーに失敗しました。",
+    "noNotesToCopy": "コピーするメモがありません。",
+    "clearSuccess": "メモをコピーして空にしました。",
+    "clearFailedComm": "メモの消去に失敗しました（通信エラー）。",
+    "clearFailed": "メモの消去中にエラーが発生しました。",
+    "buttonActionError": "処理を完了できませんでした。",
+    "ttsPlayFailed": "TTS 音声の再生に失敗しました。"
+  },
+  "inline": {
+    "addToMemo": "メモに追加",
+    "playVoice": "音声を再生",
+    "runtimeUnavailable": "拡張機能のコンテキストが無効です。ページを再読み込みしてください。",
+    "addNoteFailed": "メモの追加に失敗しました: {error}",
+    "addNoteError": "メモの追加中にエラーが発生しました: {error}",
+    "ttsRequestFailed": "TTS リクエストに失敗しました: {error}",
+    "ttsGenerateFailed": "TTS 生成に失敗しました: {error}",
+    "ttsUnknownError": "不明なエラー",
+    "ttsRequestError": "TTS エラー: {error}",
+    "audioPlayFailed": "音声の再生に失敗しました。"
+  }
+}

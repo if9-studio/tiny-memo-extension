@@ -1,14 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "简易笔记收藏家",
+  "default_locale": "en",
+  "name": "__MSG_extName__",
   "version": "0.1.0",
-  "description": "快速收集选中的文本片段到 Markdown 列表。",
+  "description": "__MSG_extDescription__",
   "permissions": ["contextMenus", "storage", "scripting", "commands", "tabs"],
   "host_permissions": ["<all_urls>", "http://localhost:5020/*"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
+    "default_title": "__MSG_actionDefaultTitle__",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
@@ -27,13 +29,13 @@
         "default": "Alt+Q",
         "mac": "MacCtrl+Q"
       },
-      "description": "通过快捷键将选中内容添加到笔记"
+      "description": "__MSG_commandAddSelection__"
     }
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["inline_button_handler.js"],
+      "js": ["i18n-catalog.js", "i18n.js", "inline_button_handler.js"],
       "run_at": "document_idle",
       "all_frames": false
     }

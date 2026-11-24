@@ -1,0 +1,107 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "Collect selected web text snippets into a clean Markdown list with optional local TTS.",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "Add selected text to Tiny Memo"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "Language",
+    "languageAria": "Interface language",
+    "languageSystem": "System",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "close": "Close",
+    "madeByIf9": "Made by if9"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "Collected notes",
+    "notesCount": "{count} notes",
+    "notesCountOne": "{count} note",
+    "notesPlaceholder": "Select text on any page and add it via context menu, shortcut, or inline button.",
+    "mergeMultiline": "Merge multi-line selection into a single line",
+    "settingsHeading": "Settings",
+    "ttsVoiceLabel": "TTS voice",
+    "ttsLoading": "Loading voices…",
+    "ttsUnavailable": "Local TTS service unavailable",
+    "autoTtsLabel": "Auto-read selected text",
+    "hoverButtonsLabel": "Show inline icons on hover (experimental)",
+    "siteConfigHeading": "Site selector rules",
+    "addSiteConfig": "Add rule",
+    "getCurrentSite": "Use current site",
+    "siteConfigEmpty": "No rules yet. Click \"Add rule\" to target specific elements.",
+    "deleteSiteConfigTitle": "Delete rule",
+    "copyMarkdown": "Copy as Markdown",
+    "copiedMarkdown": "Copied!",
+    "copyAndClear": "Copy & Clear",
+    "noNotesToCopy": "No notes to copy.",
+    "noNotesToOperate": "No notes to copy and clear.",
+    "copyFailed": "Failed to copy notes.",
+    "copyClipboardError": "Clipboard write failed. Check browser permissions.",
+    "clearSuccess": "Notes copied and cleared.",
+    "clearError": "Could not clear notes.",
+    "actionError": "Action failed. Please try again.",
+    "loadNotesError": "Failed to load notes.",
+    "websiteLink": "Website",
+    "openWebsiteTitle": "Visit Tiny Memo website"
+  },
+  "siteConfigModal": {
+    "title": "Add site selector rule",
+    "domainLabel": "Domain",
+    "domainPlaceholder": "e.g. example.com",
+    "selectorLabel": "CSS selector",
+    "selectorPlaceholder": "e.g. .article-content p",
+    "domainRequired": "Please enter a domain.",
+    "selectorRequired": "Please enter a CSS selector.",
+    "alreadyExists": "This rule already exists.",
+    "currentSiteError": "Could not read the current tab domain."
+  },
+  "ttsLang": {
+    "zh": "Chinese",
+    "en": "English",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish"
+  },
+  "contextMenu": {
+    "addSelection": "Add to Tiny Memo"
+  },
+  "background": {
+    "notesCleared": "Notes cleared.",
+    "noNotesToClear": "No notes to clear.",
+    "clearNotesError": "Error clearing notes.",
+    "ttsRequestFailed": "TTS request failed ({status})",
+    "ttsServiceError": "TTS service returned an error",
+    "fetchVoicesFailed": "Failed to fetch TTS voices ({status})"
+  },
+  "notification": {
+    "noteAdded": "+1 saved · {count} notes total",
+    "noteAddedOne": "+1 saved · {count} note total",
+    "copyAndClear": "Copy & Clear",
+    "fetchNotesError": "Failed to load notes for copying.",
+    "copyFailed": "Failed to copy notes to clipboard.",
+    "noNotesToCopy": "No notes to copy.",
+    "clearSuccess": "Notes copied and cleared.",
+    "clearFailedComm": "Failed to clear notes (connection error).",
+    "clearFailed": "Error clearing notes.",
+    "buttonActionError": "Could not complete action.",
+    "ttsPlayFailed": "Failed to play TTS audio."
+  },
+  "inline": {
+    "addToMemo": "Add to Memo",
+    "playVoice": "Play Voice",
+    "runtimeUnavailable": "Extension context invalidated. Please refresh the page.",
+    "addNoteFailed": "Failed to add note: {error}",
+    "addNoteError": "Error adding note: {error}",
+    "ttsRequestFailed": "TTS request failed: {error}",
+    "ttsGenerateFailed": "TTS generation failed: {error}",
+    "ttsUnknownError": "Unknown error",
+    "ttsRequestError": "TTS error: {error}",
+    "audioPlayFailed": "Failed to play audio."
+  }
+}

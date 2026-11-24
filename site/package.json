@@ -1,0 +1,11 @@
+{
+  "name": "tiny-memo-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "test": "node --test tools/site.test.mjs",
+    "check": "node tools/build.mjs && npm test",
+    "deploy": "npm run build && wrangler deploy"
+  }
+}

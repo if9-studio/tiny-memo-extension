@@ -1,0 +1,107 @@
+{
+  "manifest": {
+    "extName": "Tiny Memo",
+    "extDescription": "Collectez des extraits de texte sélectionnés sur le web dans une liste Markdown épurée, avec TTS local en option.",
+    "actionDefaultTitle": "Tiny Memo",
+    "commandAddSelection": "Ajouter la sélection à Tiny Memo"
+  },
+  "common": {
+    "appName": "Tiny Memo",
+    "languageLabel": "Langue",
+    "languageAria": "Langue de l’interface",
+    "languageSystem": "Système",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "close": "Fermer",
+    "madeByIf9": "Par if9"
+  },
+  "popup": {
+    "title": "Tiny Memo",
+    "notesHeading": "Notes collectées",
+    "notesCount": "{count} notes",
+    "notesCountOne": "{count} note",
+    "notesPlaceholder": "Sélectionnez du texte sur une page et ajoutez-le via le menu contextuel, un raccourci ou le bouton flottant.",
+    "mergeMultiline": "Fusionner les sélections multilignes sur une seule ligne",
+    "settingsHeading": "Réglages",
+    "ttsVoiceLabel": "Voix TTS",
+    "ttsLoading": "Chargement des voix…",
+    "ttsUnavailable": "Service TTS local indisponible",
+    "autoTtsLabel": "Lire automatiquement le texte sélectionné",
+    "hoverButtonsLabel": "Afficher les icônes au survol (expérimental)",
+    "siteConfigHeading": "Règles de sélecteur par site",
+    "addSiteConfig": "Ajouter une règle",
+    "getCurrentSite": "Utiliser ce site",
+    "siteConfigEmpty": "Aucune règle. Cliquez sur « Ajouter une règle » pour cibler des éléments.",
+    "deleteSiteConfigTitle": "Supprimer la règle",
+    "copyMarkdown": "Copier en Markdown",
+    "copiedMarkdown": "Copié !",
+    "copyAndClear": "Copier et vider",
+    "noNotesToCopy": "Aucune note à copier.",
+    "noNotesToOperate": "Aucune note à traiter.",
+    "copyFailed": "Échec de la copie des notes.",
+    "copyClipboardError": "Échec d’écriture dans le presse-papiers. Vérifiez les permissions.",
+    "clearSuccess": "Notes copiées et vidées.",
+    "clearError": "Impossible de vider les notes.",
+    "actionError": "Échec de l’opération. Veuillez réessayer.",
+    "loadNotesError": "Échec du chargement des notes.",
+    "websiteLink": "Site web",
+    "openWebsiteTitle": "Visiter le site Tiny Memo"
+  },
+  "siteConfigModal": {
+    "title": "Ajouter une règle de sélecteur",
+    "domainLabel": "Domaine",
+    "domainPlaceholder": "ex. example.com",
+    "selectorLabel": "Sélecteur CSS",
+    "selectorPlaceholder": "ex. .article-content p",
+    "domainRequired": "Veuillez saisir un domaine.",
+    "selectorRequired": "Veuillez saisir un sélecteur CSS.",
+    "alreadyExists": "Cette règle existe déjà.",
+    "currentSiteError": "Impossible de lire le domaine de l’onglet actif."
+  },
+  "ttsLang": {
+    "zh": "Chinois",
+    "en": "Anglais",
+    "ja": "Japonais",
+    "ko": "Coréen",
+    "fr": "Français",
+    "de": "Allemand",
+    "es": "Espagnol"
+  },
+  "contextMenu": {
+    "addSelection": "Ajouter à Tiny Memo"
+  },
+  "background": {
+    "notesCleared": "Notes vidées.",
+    "noNotesToClear": "Aucune note à vider.",
+    "clearNotesError": "Erreur lors de la suppression des notes.",
+    "ttsRequestFailed": "Échec de la requête TTS ({status})",
+    "ttsServiceError": "Le service TTS a renvoyé une erreur",
+    "fetchVoicesFailed": "Impossible de récupérer les voix TTS ({status})"
+  },
+  "notification": {
+    "noteAdded": "+1 enregistré · {count} notes au total",
+    "noteAddedOne": "+1 enregistré · {count} note au total",
+    "copyAndClear": "Copier et vider",
+    "fetchNotesError": "Impossible de charger les notes à copier.",
+    "copyFailed": "Échec de la copie dans le presse-papiers.",
+    "noNotesToCopy": "Aucune note à copier.",
+    "clearSuccess": "Notes copiées et vidées.",
+    "clearFailedComm": "Échec de la suppression (erreur de communication).",
+    "clearFailed": "Erreur lors de la suppression des notes.",
+    "buttonActionError": "Impossible de terminer l’action.",
+    "ttsPlayFailed": "Impossible de lire l’audio TTS."
+  },
+  "inline": {
+    "addToMemo": "Ajouter à la note",
+    "playVoice": "Lire la voix",
+    "runtimeUnavailable": "Contexte d’extension invalide. Veuillez actualiser la page.",
+    "addNoteFailed": "Échec d’ajout de la note : {error}",
+    "addNoteError": "Erreur lors de l’ajout : {error}",
+    "ttsRequestFailed": "Échec de requête TTS : {error}",
+    "ttsGenerateFailed": "Échec de génération TTS : {error}",
+    "ttsUnknownError": "Erreur inconnue",
+    "ttsRequestError": "Erreur TTS : {error}",
+    "audioPlayFailed": "Échec de lecture audio."
+  }
+}
