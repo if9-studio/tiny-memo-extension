@@ -11,26 +11,26 @@
         <img src="icons/icon16.png" alt="" width="16" height="16" />
         <span id="appBrandName">Tiny Memo</span>
       </div>
-      <div class="lang-select-wrap">
-        <span class="lang-icon" id="langGlobeIcon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <details class="lang-menu" id="languageMenu" data-lang-menu>
+        <summary id="languageMenuTrigger" aria-label="Interface language" title="Interface language">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
             <path d="M2 12h20" />
           </svg>
-        </span>
-        <select id="languageSelect" aria-label="Interface language">
-          <option value="system" id="optLangSystem">System</option>
-          <option value="en" lang="en">English</option>
-          <option value="ja" lang="ja">日本語</option>
-          <option value="zh-CN" lang="zh-CN">简体中文</option>
-          <option value="zh-TW" lang="zh-TW">繁體中文</option>
-          <option value="ko" lang="ko">한국어</option>
-          <option value="de" lang="de">Deutsch</option>
-          <option value="fr" lang="fr">Français</option>
-          <option value="es" lang="es">Español</option>
-        </select>
-      </div>
+        </summary>
+        <ul id="languageMenuList" role="menu" aria-label="Interface language">
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="system" id="optLangSystem" aria-checked="true"><span class="lang-option-label">System</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="en" lang="en" aria-checked="false"><span class="lang-option-label">English</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="ja" lang="ja" aria-checked="false"><span class="lang-option-label">日本語</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="zh-CN" lang="zh-CN" aria-checked="false"><span class="lang-option-label">简体中文</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="zh-TW" lang="zh-TW" aria-checked="false"><span class="lang-option-label">繁體中文</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="ko" lang="ko" aria-checked="false"><span class="lang-option-label">한국어</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="de" lang="de" aria-checked="false"><span class="lang-option-label">Deutsch</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="fr" lang="fr" aria-checked="false"><span class="lang-option-label">Français</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+          <li><button type="button" class="lang-option" role="menuitemradio" data-lang-value="es" lang="es" aria-checked="false"><span class="lang-option-label">Español</span><svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></button></li>
+        </ul>
+      </details>
     </header>
 
     <div class="notes-header">
