@@ -20,7 +20,8 @@ const ICONS = {
   download: `<svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>`,
   mail: `<svg class="icon" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
   arrowRight: `<svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
-  globe: `<svg class="icon icon-globe" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+  globe: `<svg class="icon icon-globe" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`,
+  check: `<svg class="lang-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`,
   sun: `<svg class="icon only-dark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
   moon: `<svg class="icon only-light" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
   menu: `<svg class="icon" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`,
@@ -112,7 +113,7 @@ function renderShell({
   ];
 
   const langMenuHtml = SUPPORTED_LANGS.map((l) => (
-    `<li data-locale="${l}"><a href="${localePath(l, slug)}" hreflang="${l}" lang="${l}"${l === lang ? ' aria-current="true"' : ""}><span>${escapeHtml(LANG_LABELS[l])}</span><span class="lang-check" aria-hidden="true">${l === lang ? "✓" : ""}</span></a></li>`
+    `<li data-locale="${l}"><a href="${localePath(l, slug)}" hreflang="${l}" lang="${l}" role="menuitemradio" aria-checked="${l === lang ? "true" : "false"}"${l === lang ? ' aria-current="true"' : ""}><span>${escapeHtml(LANG_LABELS[l])}</span>${l === lang ? ICONS.check : ""}</a></li>`
   )).join("");
 
   const networkSectionHtml = Array.isArray(networkItems) && networkItems.length > 0
@@ -172,8 +173,8 @@ function renderShell({
     </nav>
     <div class="header-tools">
       <details class="lang-menu" data-lang-menu>
-        <summary aria-label="${escapeHtml(ui.langSwitchLabel)}">${ICONS.globe}<span lang="${lang}">${escapeHtml(LANG_LABELS[lang])}</span></summary>
-        <ul data-lang-list>${langMenuHtml}</ul>
+        <summary aria-label="${escapeHtml(ui.langSwitchLabel)}" title="${escapeHtml(ui.langSwitchLabel)}">${ICONS.globe}</summary>
+        <ul data-lang-list role="menu" aria-label="${escapeHtml(ui.langSwitchLabel)}">${langMenuHtml}</ul>
       </details>
       <button class="icon-btn" type="button" data-theme-toggle aria-label="${escapeHtml(ui.themeToggleInit)}" title="${escapeHtml(ui.themeToggleInit)}">${ICONS.sun}${ICONS.moon}</button>
       <a class="btn btn-primary btn-sm" href="${deployAnchorHref}"><span class="when-live btn-inline">${ICONS.download}<span class="btn-label">${escapeHtml(ui.headerCtaLive)}</span></span><span class="when-waitlist btn-inline">${ICONS.mail}<span class="btn-label">${escapeHtml(ui.headerCtaWaitlist)}</span></span></a>

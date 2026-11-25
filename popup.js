@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const i18n = globalThis.TinyMemoI18n;
   const catalog = globalThis.__TINY_MEMO_CATALOG__ || {};
 
-  const languageSelect = document.getElementById("languageSelect");
+  const languageMenu = document.getElementById("languageMenu");
+  const languageMenuTrigger = document.getElementById("languageMenuTrigger");
+  const languageMenuList = document.getElementById("languageMenuList");
   const optLangSystem = document.getElementById("optLangSystem");
   const appBrandName = document.getElementById("appBrandName");
   const notesHeading = document.getElementById("notesHeading");
@@ -78,8 +80,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.title = t("popup.title");
 
     appBrandName.textContent = t("common.appName");
-    languageSelect.setAttribute("aria-label", t("common.languageAria"));
-    optLangSystem.textContent = t("common.languageSystem");
+    const langAria = t("common.languageAria");
+    languageMenuTrigger.setAttribute("aria-label", langAria);
+    languageMenuTrigger.setAttribute("title", langAria);
+    languageMenuList.setAttribute("aria-label", langAria);
+    const sysLabel = optLangSystem.querySelector(".lang-option-label");
+    if (sysLabel) sysLabel.textContent = t("common.languageSystem");
 
     notesHeading.textContent = t("popup.notesHeading");
     notesDisplay.placeholder = t("popup.notesPlaceholder");
@@ -117,28 +123,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderSiteConfigs(cachedSiteConfigs);
   }
 
+  function syncLanguageMenuChecked(pref) {
+    languageMenuList.querySelectorAll("[data-lang-value]").forEach((btn) => {
+      const selected = btn.getAttribute("data-lang-value") === pref;
+      btn.setAttribute("aria-checked", String(selected));
+    });
+  }
+
   async function initLanguage() {
     try {
       const stored = await chrome.storage.local.get(["appLanguage"]);
       const pref = i18n.normalizeLanguagePreference(stored?.appLanguage) || "system";
-      languageSelect.value = pref;
+      syncLanguageMenuChecked(pref);
       activeLanguage = await i18n.getActiveLanguage();
     } catch (error) {
       console.error("[Tiny Memo] Failed to load language preference:", error);
-      languageSelect.value = "system";
+      syncLanguageMenuChecked("system");
       activeLanguage = i18n.resolveBrowserLanguage();
     }
     applyTranslations();
   }
 
-  languageSelect.addEventListener("change", async () => {
-    const selected = i18n.normalizeLanguagePreference(languageSelect.value) || "system";
-    try {
-      await chrome.storage.local.set({ appLanguage: selected });
-      activeLanguage = await i18n.getActiveLanguage();
-      applyTranslations();
-    } catch (error) {
-      console.error("[Tiny Memo] Failed to save language preference:", error);
+  languageMenuList.querySelectorAll("[data-lang-value]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const selected = i18n.normalizeLanguagePreference(btn.getAttribute("data-lang-value")) || "system";
+      languageMenu.removeAttribute("open");
+      try {
+        await chrome.storage.local.set({ appLanguage: selected });
+        syncLanguageMenuChecked(selected);
+        activeLanguage = await i18n.getActiveLanguage();
+        applyTranslations();
+      } catch (error) {
+        console.error("[Tiny Memo] Failed to save language preference:", error);
+      }
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (languageMenu.hasAttribute("open") && !languageMenu.contains(event.target)) {
+      languageMenu.removeAttribute("open");
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && languageMenu.hasAttribute("open")) {
+      languageMenu.removeAttribute("open");
+      languageMenuTrigger.focus();
     }
   });
 

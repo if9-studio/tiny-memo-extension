@@ -162,7 +162,7 @@ test("3. Extension source files have zero hardcoded Han characters, zero forbidd
   }
 
   const popupHtml = await readFile(path.join(ROOT, "popup.html"), "utf8");
-  assert.ok(popupHtml.includes('<option value="system" id="optLangSystem">'), "popup.html must put System first in languageSelect");
+  assert.ok(popupHtml.includes('data-lang-value="system" id="optLangSystem"'), "popup.html must put System first in languageMenu");
   for (const [locale, label] of [
     ["en", "English"],
     ["ja", "日本語"],
@@ -173,10 +173,12 @@ test("3. Extension source files have zero hardcoded Han characters, zero forbidd
     ["fr", "Français"],
     ["es", "Español"],
   ]) {
-    assert.ok(popupHtml.includes(`value="${locale}" lang="${locale}">${label}</option>`), `Missing endonym option ${locale} in popup.html`);
+    assert.ok(popupHtml.includes(`data-lang-value="${locale}" lang="${locale}"`), `Missing lang attr ${locale} in popup.html`);
+    assert.ok(popupHtml.includes(`<span class="lang-option-label">${label}</span>`), `Missing endonym option ${locale} in popup.html`);
   }
   assert.ok(popupHtml.includes('<circle cx="12" cy="12" r="10" />'), "Missing Globe icon in popup.html");
   assert.ok(popupHtml.includes('stroke-width="1.75"'), "Missing v2 stroke-width=1.75 in popup.html");
+  assert.ok(popupHtml.includes('stroke-width="2"'), "Missing Plan C Check stroke-width=2 in popup.html");
 
   const i18nJs = await readFile(path.join(ROOT, "i18n.js"), "utf8");
   for (const fn of ["globeSvg", "settingsSvg", "hashSvg", "pencilSvg", "trash2Svg", "arrowUpRightSvg", "if9WordSvg"]) {
