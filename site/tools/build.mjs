@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // Zero-dependency static site builder for tiny-memo-web (16 localized pages + sitemap.xml + robots.txt + llms.txt + _redirects + assets/).
+import { existsSync } from "node:fs";
 import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,6 +18,7 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const WEBSITE_ROOT = path.resolve(__dirname, "..");
 const ASSETS_SRC = path.join(WEBSITE_ROOT, "assets");
+const PUBLIC_SRC = path.join(WEBSITE_ROOT, "public");
 const DIST_DIR = path.join(WEBSITE_ROOT, "dist");
 
 function peerOriginHref(origin, lang) {
@@ -109,6 +111,9 @@ export async function buildSite() {
   await rm(DIST_DIR, { recursive: true, force: true });
   await mkdir(DIST_DIR, { recursive: true });
   await cp(ASSETS_SRC, path.join(DIST_DIR, "assets"), { recursive: true });
+  if (existsSync(PUBLIC_SRC)) {
+    await cp(PUBLIC_SRC, DIST_DIR, { recursive: true });
+  }
 
   const writes = [];
   for (const lang of SUPPORTED_LANGS) {

@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "persona": {
+    "name": "Linnea Park",
+    "email": "linnea@fieldnotes.studio",
+    "handle": "@linnea",
+    "studio": "Fieldnotes Studio",
+    "site": "https://fieldnotes.studio"
+  },
+  "ttsVoices": {
+    "en": [
+      { "name": "en-US-EmmaNeural", "displayName": "Emma (en-US, Calm)" },
+      { "name": "en-GB-SoniaNeural", "displayName": "Sonia (en-GB, Editorial)" }
+    ],
+    "zh": [
+      { "name": "zh-CN-XiaoxiaoNeural", "displayName": "Xiaoxiao (zh-CN)" },
+      { "name": "zh-CN-YunxiNeural", "displayName": "Yunxi (zh-CN)" }
+    ],
+    "ja": [
+      { "name": "ja-JP-NanamiNeural", "displayName": "Nanami (ja-JP)" }
+    ]
+  },
+  "ttsVoicesZh": {
+    "zh": [
+      { "name": "zh-CN-XiaoxiaoNeural", "displayName": "晓晓 (zh-CN · 柔和朗读)" },
+      { "name": "zh-CN-YunxiNeural", "displayName": "云希 (zh-CN · 沉稳男声)" }
+    ],
+    "en": [
+      { "name": "en-US-EmmaNeural", "displayName": "Emma (en-US · Clear)" }
+    ],
+    "ja": [
+      { "name": "ja-JP-NanamiNeural", "displayName": "Nanami (ja-JP)" }
+    ]
+  },
+  "locales": {
+    "en": {
+      "workspace": {
+        "brandLabel": "Fieldnotes Reader",
+        "researcherBadge": "Linnea Park · linnea@fieldnotes.studio",
+        "extensionHint": "Tiny Memo",
+        "themeLight": "Light",
+        "themeDark": "Dark",
+        "localeLabel": "English (EN)"
+      },
+      "siteConfigs": [
+        { "domain": "fieldnotes.studio", "selector": "article p" },
+        { "domain": "minimalcraft.press", "selector": ".essay-body blockquote" },
+        { "domain": "typefoundry.journal", "selector": "main .reading-column p" }
+      ],
+      "scenes": {
+        "01-inline-selection-capture": {
+          "url": "https://fieldnotes.studio/essays/quiet-software",
+          "tabTitle": "Notes on Quiet Software and Durable Attention",
+          "eyebrow": "Fieldnotes Essays · Issue 14",
+          "headline": "Notes on Quiet Software and Durable Attention",
+          "byline": "By Linnea Park · linnea@fieldnotes.studio · 6 min read",
+          "paragraphs": [
+            "Software ages well when it leaves the reader's desk uncluttered. Most reading utilities fail not from missing features, but because every capture asks for folders, tags, and account logins before a single sentence has been saved.",
+            "Small single-purpose tools behave more like a pocket notebook: you highlight the exact sentence worth keeping, attach it to your running list, and stay inside the essay you came to read.",
+            "Local browser storage keeps that loop instantaneous. Excerpts land as plain Markdown lines ready for morning synthesis without background sync queues or telemetry."
+          ],
+          "selectedText": "you highlight the exact sentence worth keeping, attach it to your running list",
+          "notes": [
+            "[fieldnotes.studio] Software ages well when it leaves the reader's desk uncluttered.",
+            "[fieldnotes.studio] Highlight the exact sentence worth keeping and stay inside the essay you came to read.",
+            "[minimalcraft.press] Generous line height gives dense technical prose room to breathe.",
+            "[typefoundry.journal] Tabular numerals prevent layout jitter in compact toolbars."
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": false,
+            "openSiteRules": false,
+            "ttsVoice": "en-US-EmmaNeural"
+          }
+        },
+        "02-popup-memo-stream": {
+          "url": "https://fieldnotes.studio/reading-log",
+          "tabTitle": "Weekly Reading Ledger — Craft & Systems",
+          "eyebrow": "Chronological Reading Stream · Linnea Park",
+          "headline": "Weekly Reading Ledger — Craft & Systems",
+          "byline": "Curated by Linnea Park (linnea@fieldnotes.studio) · 4 sources clipped today",
+          "entries": [
+            {
+              "time": "09:14",
+              "domain": "fieldnotes.studio",
+              "title": "Quiet Software and Durable Attention",
+              "excerpt": "Calm interfaces respect attention budgets by keeping capture latency under a second."
+            },
+            {
+              "time": "10:28",
+              "domain": "minimalcraft.press",
+              "title": "Paper Margins and Digital Annotation",
+              "excerpt": "Wide margins invite short reactions beside the source text without breaking reading flow."
+            },
+            {
+              "time": "13:42",
+              "domain": "typefoundry.journal",
+              "title": "Designing Legible Monospace Lists",
+              "excerpt": "Consistent 1.5 line height and crisp 1px dividers make dense note streams easy to scan."
+            },
+            {
+              "time": "16:05",
+              "domain": "quietweb.org",
+              "title": "Local-First Clipping Workflows",
+              "excerpt": "Plain Markdown bullets remain portable across every editor ten years from now."
+            }
+          ],
+          "notes": [
+            "[09:14 · fieldnotes.studio] Calm interfaces respect attention budgets by keeping capture latency under a second.",
+            "[10:28 · minimalcraft.press] Wide margins invite short reactions beside the source text without breaking reading flow.",
+            "[13:42 · typefoundry.journal] Consistent 1.5 line height and crisp 1px dividers make dense note streams easy to scan.",
+            "[16:05 · quietweb.org] Plain Markdown bullets remain portable across every editor ten years from now."
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": true,
+            "openSiteRules": true,
+            "ttsVoice": "en-US-EmmaNeural"
+          }
+        },
+        "03-instant-search-tag-filter": {
+          "url": "https://fieldnotes.studio/library?tag=calm-tools&q=margins",
+          "tabTitle": "Annotated Index — Filter & Tag Clippings",
+          "eyebrow": "Reading Library · Instant Keyword & Tag Filter",
+          "headline": "Annotated Index: Typography & Local-First Tools",
+          "searchLabel": "Filter notes",
+          "searchQuery": "margins",
+          "activeTag": "#calm-tools",
+          "tags": ["#calm-tools", "#typography", "#local-first", "#annotation", "#markdown"],
+          "cards": [
+            {
+              "tag": "#calm-tools",
+              "domain": "minimalcraft.press",
+              "title": "Generous margins reduce visual fatigue",
+              "snippet": "Leaving balanced whitespace around margins helps readers track line endings and revisit highlighted notes faster."
+            },
+            {
+              "tag": "#typography",
+              "domain": "typefoundry.journal",
+              "title": "Marginalia scales best in plain text",
+              "snippet": "When margin notes export as clean Markdown bullets, filtering by keyword or tag stays instantaneous."
+            },
+            {
+              "tag": "#local-first",
+              "domain": "fieldnotes.studio",
+              "title": "Predictable selector rules per domain",
+              "snippet": "Pair domain rules with article selectors so hover capture icons attach only to prose blocks."
+            }
+          ],
+          "hoverTargetIndex": 0,
+          "notes": [
+            "[#calm-tools · minimalcraft.press] Leaving balanced whitespace around margins helps readers track line endings.",
+            "[#typography · typefoundry.journal] Margin notes exported as clean Markdown bullets keep filtering instantaneous.",
+            "[#local-first · fieldnotes.studio] Pair domain rules with article selectors so hover icons attach only to prose blocks."
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": true,
+            "openSiteRules": true,
+            "ttsVoice": "en-GB-SoniaNeural"
+          }
+        },
+        "04-quick-note-composer": {
+          "url": "https://minimalcraft.press/essays/paper-margins",
+          "tabTitle": "Paper Margins and Digital Annotation",
+          "eyebrow": "Minimalcraft Press · Design Notes",
+          "headline": "Paper Margins and Digital Annotation",
+          "byline": "Reading session by Linnea Park <linnea@fieldnotes.studio>",
+          "articleParagraphs": [
+            "Printed books taught generations of readers to think in the margin. A pencil line in the gutter captures an immediate reaction without turning reading into a filing chore.",
+            "Digital clippers often over-correct by importing entire stylesheets, images, and navigation menus. Collecting only the chosen sentence preserves the original clarity of thought."
+          ],
+          "selectedText": "Collecting only the chosen sentence preserves the original clarity of thought.",
+          "composer": {
+            "title": "Personal Thought Card",
+            "sourceLabel": "Source: minimalcraft.press/essays/paper-margins",
+            "tagChips": ["#annotation", "#margin-notes", "#synthesis"],
+            "draftTitle": "Keep excerpts atomic before tagging",
+            "draftBody": "One idea per Markdown bullet makes weekly review effortless. Pair clipped quotes with a short personal synthesis right beside the paragraph.",
+            "savedNotice": "Appended to Tiny Memo queue (5 notes)"
+          },
+          "notes": [
+            "[#annotation] Printed books taught readers to think in the margin without turning reading into filing.",
+            "[#margin-notes] Collecting only the chosen sentence preserves the original clarity of thought.",
+            "[#synthesis] Keep excerpts atomic before tagging so weekly review stays effortless.",
+            "[#calm-tools] Single-line merge cleans stray line breaks from multi-column layouts.",
+            "[#local-first] Export queue stays offline in chrome.storage.local until Copy & Clear."
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": true,
+            "hoverButtons": false,
+            "openSiteRules": false,
+            "ttsVoice": "en-US-EmmaNeural"
+          }
+        },
+        "05-markdown-export-locale": {
+          "url": "https://fieldnotes.studio/export",
+          "tabTitle": "Export & Appearance — Tiny Memo Workspace",
+          "eyebrow": "Export Bundle & Workspace Controls",
+          "headline": "Markdown & JSON Export · 8 Languages · Light & Dark",
+          "byline": "Author: Linnea Park <linnea@fieldnotes.studio> · Local vault ready",
+          "markdownTitle": "Markdown Export (Copied to clipboard)",
+          "markdownLines": [
+            "# Reading Clippings — Linnea Park",
+            "- [fieldnotes.studio] Software ages well when it leaves the reader's desk uncluttered.",
+            "- [minimalcraft.press] Collecting only the chosen sentence preserves clarity of thought.",
+            "- [typefoundry.journal] Tabular numerals prevent layout jitter in compact toolbars.",
+            "- [quietweb.org] Plain Markdown bullets remain portable across every editor."
+          ],
+          "jsonTitle": "Structured JSON Snapshot",
+          "jsonPreview": "{\n  \"curator\": \"Linnea Park <linnea@fieldnotes.studio>\",\n  \"locale\": \"en\",\n  \"mergeMultiline\": true,\n  \"notesCount\": 4,\n  \"siteRules\": 3\n}",
+          "appearanceNote": "8 UI languages supported · Instant Light & Dark contrast",
+          "notes": [
+            "[fieldnotes.studio] Software ages well when it leaves the reader's desk uncluttered.",
+            "[minimalcraft.press] Collecting only the chosen sentence preserves clarity of thought.",
+            "[typefoundry.journal] Tabular numerals prevent layout jitter in compact toolbars.",
+            "[quietweb.org] Plain Markdown bullets remain portable across every editor."
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": true,
+            "openSiteRules": true,
+            "ttsVoice": "en-US-EmmaNeural",
+            "triggerCopyFeedback": true,
+            "openLanguageMenu": false
+          }
+        }
+      }
+    },
+    "zh-CN": {
+      "workspace": {
+        "brandLabel": "Fieldnotes 阅读工作台",
+        "researcherBadge": "林尼亚·帕克 · linnea@fieldnotes.studio",
+        "extensionHint": "Tiny Memo",
+        "themeLight": "浅色",
+        "themeDark": "深色",
+        "localeLabel": "简体中文 (zh-CN)"
+      },
+      "siteConfigs": [
+        { "domain": "fieldnotes.studio", "selector": "article p" },
+        { "domain": "minimalcraft.press", "selector": ".essay-body blockquote" },
+        { "domain": "typefoundry.journal", "selector": "main .reading-column p" }
+      ],
+      "scenes": {
+        "01-inline-selection-capture": {
+          "url": "https://fieldnotes.studio/essays/quiet-software",
+          "tabTitle": "安静软件与持久注意力笔记",
+          "eyebrow": "Fieldnotes 随笔集 · 第 14 期",
+          "headline": "安静软件与持久注意力笔记",
+          "byline": "作者：Linnea Park · linnea@fieldnotes.studio · 阅读约 6 分钟",
+          "paragraphs": [
+            "真正耐用的软件从不占据读者的桌面焦点。许多剪藏工具之所以半途而废，并不是功能太少，而是在存下第一句话之前就迫使人建文件夹、填标签与登录账号。",
+            "轻巧的单用途工具更像随身笔记本：划选真正值得保留的那一句，顺手收进当下列表，视线依然停留在正在阅读的文章里。",
+            "浏览器本地存储让这套循环几乎零延迟。每条摘录都会整理成干净的 Markdown 列表，无需后台同步队列也能随时导出梳理。"
+          ],
+          "selectedText": "划选真正值得保留的那一句，顺手收进当下列表，视线依然停留在正在阅读的文章里。",
+          "notes": [
+            "[fieldnotes.studio] 真正耐用的软件从不占据读者的桌面焦点。",
+            "[fieldnotes.studio] 划选真正值得保留的那一句，顺手收进当下列表，视线依然停留在正在阅读的文章里。",
+            "[minimalcraft.press] 宽松的行距让密集的技术散文保持呼吸感。",
+            "[typefoundry.journal] 等宽数字能避免紧凑工具栏在计数变化时产生抖动。"
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": false,
+            "openSiteRules": false,
+            "ttsVoice": "zh-CN-XiaoxiaoNeural"
+          }
+        },
+        "02-popup-memo-stream": {
+          "url": "https://fieldnotes.studio/reading-log",
+          "tabTitle": "每周阅读手记：器物与系统",
+          "eyebrow": "按时间排列的摘录流 · Linnea Park",
+          "headline": "每周阅读手记：器物与系统",
+          "byline": "整理人：Linnea Park (linnea@fieldnotes.studio) · 今日摘录自 4 个站点",
+          "entries": [
+            {
+              "time": "09:14",
+              "domain": "fieldnotes.studio",
+              "title": "安静软件与持久注意力",
+              "excerpt": "克制的界面尊重注意力预算，将每一次摘录的延迟控制在瞬间之内。"
+            },
+            {
+              "time": "10:28",
+              "domain": "minimalcraft.press",
+              "title": "纸页留白与数字批注",
+              "excerpt": "充裕的页边留白鼓励读者在不打断心流的前提下记录简短思考。"
+            },
+            {
+              "time": "13:42",
+              "domain": "typefoundry.journal",
+              "title": "清晰可读的等宽笔记流",
+              "excerpt": "稳定的 1.5 倍行高与细腻分割线，让紧凑的笔记流依然一目了然。"
+            },
+            {
+              "time": "16:05",
+              "domain": "quietweb.org",
+              "title": "本地优先的剪藏工作流",
+              "excerpt": "纯文本 Markdown 列表在十年后的任何编辑器里依然清晰可读。"
+            }
+          ],
+          "notes": [
+            "[09:14 · fieldnotes.studio] 克制的界面尊重注意力预算，将每一次摘录延迟控制在瞬间。",
+            "[10:28 · minimalcraft.press] 充裕的页边留白鼓励读者在不打断心流的前提下记录思考。",
+            "[13:42 · typefoundry.journal] 稳定的行高与细腻分割线让紧凑的笔记流一目了然。",
+            "[16:05 · quietweb.org] 纯文本 Markdown 列表在十年后的任何编辑器里依然清晰可读。"
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": true,
+            "openSiteRules": true,
+            "ttsVoice": "zh-CN-XiaoxiaoNeural"
+          }
+        },
+        "03-instant-search-tag-filter": {
+          "url": "https://fieldnotes.studio/library?tag=calm-tools&q=留白",
+          "tabTitle": "主题索引 — 关键词搜索与标签筛选",
+          "eyebrow": "阅读索引 · 即时关键词与标签筛选",
+          "headline": "主题索引：排版细节与本地优先工具",
+          "searchLabel": "筛选笔记",
+          "searchQuery": "留白",
+          "activeTag": "#安静工具",
+          "tags": ["#安静工具", "#版式设计", "#本地优先", "#阅读批注", "#Markdown"],
+          "cards": [
+            {
+              "tag": "#安静工具",
+              "domain": "minimalcraft.press",
+              "title": "适度留白能显著降低视觉疲劳",
+              "snippet": "在段落四周保留均衡的留白，能帮助读者迅速定位行尾并回看划选的高亮句段。"
+            },
+            {
+              "tag": "#版式设计",
+              "domain": "typefoundry.journal",
+              "title": "纯文本最适合承载边注索引",
+              "snippet": "当页边摘录导出为整洁的 Markdown 条目时，按关键词与标签检索始终即时响应。"
+            },
+            {
+              "tag": "#本地优先",
+              "domain": "fieldnotes.studio",
+              "title": "按域名精准配置选择器规则",
+              "snippet": "将站点域名与正文 CSS 选择器配对后，悬停按钮仅出现在真正的文章段落旁。"
+            }
+          ],
+          "hoverTargetIndex": 0,
+          "notes": [
+            "[#安静工具 · minimalcraft.press] 在段落四周保留均衡留白，能帮助读者迅速回看高亮句段。",
+            "[#版式设计 · typefoundry.journal] 页边摘录导出为 Markdown 条目后，关键词筛选始终即时响应。",
+            "[#本地优先 · fieldnotes.studio] 域名与正文选择器配对后，悬停按钮仅出现在文章段落旁。"
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": true,
+            "openSiteRules": true,
+            "ttsVoice": "zh-CN-YunxiNeural"
+          }
+        },
+        "04-quick-note-composer": {
+          "url": "https://minimalcraft.press/essays/paper-margins",
+          "tabTitle": "纸页留白与数字批注",
+          "eyebrow": "Minimalcraft Press · 设计手记",
+          "headline": "纸页留白与数字批注",
+          "byline": "阅读会话：Linnea Park <linnea@fieldnotes.studio>",
+          "articleParagraphs": [
+            "纸质书教会了几代读者在页边思考。铅笔在栏边画下的一道短线，能立即留住灵感，而不必把阅读变成繁琐的归档劳动。",
+            "许多网页剪藏插件常把整套样式表、广告图和导航栏一起抓下来；只收下你真正选中的那几句话，反而能保留思考原本的清澈。"
+          ],
+          "selectedText": "只收下你真正选中的那几句话，反而能保留思考原本的清澈。",
+          "composer": {
+            "title": "个人思考卡片",
+            "sourceLabel": "来源：minimalcraft.press/essays/paper-margins",
+            "tagChips": ["#批注", "#页边笔记", "#每周整理"],
+            "draftTitle": "先保持单条摘录轻量，再统一整理标签",
+            "draftBody": "一条 Markdown 项目符号只承载一个观点，能让周末复盘变得轻松。紧贴原文段落记下简短体会，再用一键复制带走。",
+            "savedNotice": "已加入 Tiny Memo 队列（共 5 条）"
+          },
+          "notes": [
+            "[#批注] 纸质书教会读者在页边思考，而不必把阅读变成繁琐归档。",
+            "[#页边笔记] 只收下真正选中的几句话，能保留思考原本的清澈。",
+            "[#每周整理] 一条符号只承载一个观点，能让周末复盘变得轻松。",
+            "[#安静工具] 多行合并设置会自动清理双栏排版带来的多余换行。",
+            "[#本地优先] 摘录列表仅保存在浏览器本地，复制并清空后即刻归零。"
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": true,
+            "hoverButtons": false,
+            "openSiteRules": false,
+            "ttsVoice": "zh-CN-XiaoxiaoNeural"
+          }
+        },
+        "05-markdown-export-locale": {
+          "url": "https://fieldnotes.studio/export",
+          "tabTitle": "导出与多语言外观 — Tiny Memo",
+          "eyebrow": "导出清单与外观语言控制",
+          "headline": "Markdown / JSON 导出 · 8 种语言 · 浅色与深色模式",
+          "byline": "整理者：Linnea Park <linnea@fieldnotes.studio> · 本地仓库就绪",
+          "markdownTitle": "Markdown 导出结果（已复制到剪贴板）",
+          "markdownLines": [
+            "# 阅读摘录 — Linnea Park",
+            "- [fieldnotes.studio] 真正耐用的软件从不占据读者的桌面焦点。",
+            "- [minimalcraft.press] 只收下真正选中的几句话，能保留思考的清澈。",
+            "- [typefoundry.journal] 等宽数字能避免紧凑工具栏在计数变化时产生抖动。",
+            "- [quietweb.org] 纯文本 Markdown 列表在十年后依然清晰可读。"
+          ],
+          "jsonTitle": "结构化 JSON 快照",
+          "jsonPreview": "{\n  \"curator\": \"Linnea Park <linnea@fieldnotes.studio>\",\n  \"locale\": \"zh-CN\",\n  \"mergeMultiline\": true,\n  \"notesCount\": 4,\n  \"siteRules\": 3\n}",
+          "appearanceNote": "支持 8 种界面语言即时切换 · 清晰浅色与深色对比",
+          "notes": [
+            "[fieldnotes.studio] 真正耐用的软件从不占据读者的桌面焦点。",
+            "[minimalcraft.press] 只收下真正选中的几句话，能保留思考的清澈。",
+            "[typefoundry.journal] 等宽数字能避免紧凑工具栏在计数变化时产生抖动。",
+            "[quietweb.org] 纯文本 Markdown 列表在十年后依然清晰可读。"
+          ],
+          "popup": {
+            "mergeMultiline": true,
+            "autoTts": false,
+            "hoverButtons": true,
+            "openSiteRules": true,
+            "ttsVoice": "zh-CN-XiaoxiaoNeural",
+            "triggerCopyFeedback": true,
+            "openLanguageMenu": true
+          }
+        }
+      }
+    }
+  }
+}
